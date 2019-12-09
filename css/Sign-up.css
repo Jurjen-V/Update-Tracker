@@ -1,0 +1,97 @@
+/*Logo*/
+h1{
+	margin-left: 10%;
+	position: absolute;
+	font-size: 40px;
+	margin-top: 50px;
+}
+.update{
+	color: #707070;
+	display: inline;
+}
+.tracker{
+	color: #1A9988;
+	display: inline;
+}
+
+/*input*/
+#username{
+	margin-left: 10%;
+	width: 80%;
+	margin-top: 150px;
+}
+#password{
+	margin-left: 10%;
+	width: 80%;
+}
+#e-mail{
+	margin-left: 10%;
+	width: 80%;
+}
+/*sign up button*/
+.not-a-user{
+	margin-left: 10%;
+	font-size: 35px;
+	color: #707070;
+}
+.Sign-up{
+	font-size: 35px;
+	color: #1A9988;
+	text-decoration: underline;
+}
+#Sign-up{
+	font-size: 35px;
+	text-transform: capitalize;
+	height: 75px;
+	width: 120%;
+	right: 20%;
+	border-radius: 10px;
+	opacity: 1;
+}
+/*form box*/
+#form{
+	background-color: white;	
+	width: 30%;
+	height: 70%;
+	position: absolute;
+	top: 15%;
+	left: 35%;
+	opacity: 0.9;
+}
+@media only screen and (max-width: 1000px) {
+	#form{
+		background-color: white;	
+		width: 80%;
+		height: 70%;
+		position: absolute;
+		top: 10%;
+		left: 10%;
+	}
+	#Sign-up{
+		font-size: 20px;
+		text-transform: capitalize;
+		height: 50px;
+		width: 120%;
+		right: 20%;
+		border-radius: 10px;
+	}
+	h1{
+		font-size: 20px;
+	}
+	.not-a-user{
+		font-size: 20px;
+	}
+	.Sign-up{
+		font-size: 20px;
+	}
+	/*input*/
+	#username{
+		margin-top: 100px;
+	}
+	#password{
+		margin-top: 0;
+	}
+	#e-mail{
+		margin-top: 0;
+	}
+}
