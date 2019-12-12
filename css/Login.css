@@ -1,18 +1,3 @@
-/*Logo*/
-h1{
-	margin-left: 10%;
-	position: absolute;
-	font-size: 40px;
-	margin-top: 50px;
-}
-.update{
-	color: #707070;
-	display: inline;
-}
-.tracker{
-	color: #1A9988;
-	display: inline;
-}
 /*form box*/
 #form{
 	background-color: white;	

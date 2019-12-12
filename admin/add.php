@@ -1,4 +1,24 @@
 <?php  
+session_start();
+if (!isset($_SESSION['username'])) {
+  $_SESSION['msg'] = "You must log in first";
+    header('location: ../index.php');
+}
+if (isset($_GET['logout'])) {
+  session_destroy();
+    unset($_SESSION['username']);
+    header("location: ../index.php");
+}
+$dbhost = 'localhost';
+$dbname = 'update-tracker';
+$user = 'root';
+$pass = ''; 
+$db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
+$result_users = $db->prepare("SELECT * FROM users");
+$result_users->execute();
+for($i=0; $row = $result_users->fetch(); $i++){
+  $id = $row['ID'];
+} 
   $username = "";
   $email = "";
   if(isset($_POST['Sign-up'])) {
@@ -78,23 +98,21 @@
   }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!--Import Google Icon Font-->
-  <link rel="icon" href="img/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="../css/add.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-  <link rel="stylesheet" href="css/Sign-up.css">
-  <link rel="stylesheet" href="css/style.css">
-
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sign-up</title>
-  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-  <meta content="utf-8" http-equiv="encoding">
+  <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+  <meta charset="UTF-8">
+  <title>Home</title>
 </head>
-<body class="login_body">
+<ul>
+  <li><a href="index.php"><i class="material-icons">home</i></a></li>
+  <li><a href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
+  <li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
+</ul>
+<body>
 	<div class="row">
 	<form class="col s12" id="form" action="" method="post">
 		<h1 class="update">Update<div class="tracker">Tracker</h1>
@@ -129,5 +147,5 @@
 	</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="../js/materialize.min.js"></script>
 </html>

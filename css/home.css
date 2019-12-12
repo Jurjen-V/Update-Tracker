@@ -1,0 +1,32 @@
+.Software{
+	width: 80%;
+	right: 10%;
+	top: 20%;
+	position: absolute;
+}
+tr:nth-child(even){
+	background-color: #DCDCDC;
+}
+
+.buy{
+	position: absolute;
+	display: block;
+	right: 100px;
+	bottom: 10px;
+	margin-right: 10%;
+	font-size: 24px;
+}
+#buy{
+	font-size: 24px;
+	border-radius: 10px;
+	text-transform: capitalize;
+	height: 50px;
+	width: 20%;
+}
+.userinfo{
+	margin-top: 150px;
+	font-size: 24px;
+}
+.userinfo1{
+	font-size: 24px;
+}

@@ -1,3 +1,32 @@
+<?php
+session_start();
+$connect = mysqli_connect('localhost', 'root', '', 'update-tracker') or die("Opps some thing went wrong");
+	 if (isset($_POST['login_user'])) {
+		 extract($_POST);
+		// Get Old Password from Database which is having unique userName
+		$sqlQuery = mysqli_query($connect, "select * from users where username='$username'");
+		$res = mysqli_fetch_array($sqlQuery);
+		$current_password = $res['Password'];
+		echo $admin = $res['Admin'];
+		$enteredPassword = $_POST["password"];
+		if (password_verify($enteredPassword, $current_password)) {
+			 	/* If Password is valid!! */
+			 	$_SESSION['username'] = $username;
+		 		$_SESSION['success'] = "You are now logged in";
+		 		if($admin == 0){
+		 			header('location: software/index.php');
+		 		}else{
+		 			header('location: admin/index.php');
+		 		}
+		}
+		else {
+			 /* If Invalid password Entered */
+			 $alt = "Login Failed! Wrong user ID or Password";
+			 echo $alt;
+			 // header("location: login.php?m=$alt");
+		}
+ }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +36,7 @@
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
   <link rel="stylesheet" href="css/Login.css">
+  <link rel="stylesheet" href="css/style.css">
 
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>

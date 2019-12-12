@@ -1,0 +1,52 @@
+/*Nav*/
+body{
+  margin: 0px;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #1A9988;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  color: white;
+}
+.right{
+  float: right;
+}
+
+/*Logo*/
+h1{
+  position: absolute;
+  font-size: 35px;
+  margin-top: 50px;
+}
+.update{
+  color: #707070;
+  display: inline;
+  margin-left: 5%;
+}
+.tracker{
+  color: #1A9988;
+  display: inline;
+}
+.link{
+  color: #1a9988;
+}
+.link:hover{
+  color:  #0f7567;
+}

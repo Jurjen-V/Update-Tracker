@@ -1,0 +1,23 @@
+/*input*/
+#username{
+	margin-left: 10%;
+	width: 80%;
+	margin-top: 150px;
+}
+#password{
+	margin-left: 10%;
+	width: 80%;
+}
+#e-mail{
+	margin-left: 10%;
+	width: 80%;
+}
+#Sign-up{
+	position: absolute;
+	font-size: 35px;
+	text-transform: capitalize;
+	height: 75px;
+	right: 10%;
+	border-radius: 10px;
+	opacity: 1;
+}
