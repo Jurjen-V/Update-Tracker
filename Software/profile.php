@@ -10,7 +10,7 @@ if (isset($_GET['logout'])) {
     header("location: ../index.php");
 }
 $dbhost = 'localhost';
-$dbname = 'update-tracker';
+$dbname = 'update-tracker1';
 $user = 'root';
 $pass = ''; 
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
@@ -24,7 +24,7 @@ $result = $db->prepare("SELECT * FROM users WHERE id =" . $_GET['edit_id']);
 	}
  if (isset($_POST['Save'])) {
     $dbhost = 'localhost';
-    $dbname = 'update-tracker';
+    $dbname = 'update-tracker1';
     $user = 'root';
     $pass = '';
     $error = 0;
@@ -73,14 +73,13 @@ $result = $db->prepare("SELECT * FROM users WHERE id =" . $_GET['edit_id']);
 		$query = "UPDATE users SET Username=:Username, Email=:Email, Password=:Password WHERE ID=:ID";
 		$stmt = $db->prepare($query);
 
-		$stmt->bindValue(":Username", $Username, PDO::PARAM_STR);
+		$stmt->bindValue(":Username", $username, PDO::PARAM_STR);
 		$stmt->bindValue(":Email", $email, PDO::PARAM_STR);
 		$stmt->bindValue(":Password", $password_3, PDO::PARAM_STR);
 		$stmt->bindValue(":ID", $_GET['edit_id'], PDO::PARAM_STR);
 
 		try {
 			$stmt->execute();
-
 		}
 		catch (PDOException $e) {
 			echo $e->getMessage();

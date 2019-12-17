@@ -10,7 +10,7 @@ if (isset($_GET['logout'])) {
     header("location: ../index.php");
 }
 $dbhost = 'localhost';
-$dbname = 'update-tracker';
+$dbname = 'update-tracker1';
 $user = 'root';
 $pass = ''; 
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
@@ -30,7 +30,7 @@ for($i=0; $row = $result_software->fetch(); $i++){
 
 if (isset($_POST['Save'])) {
     $dbhost = 'localhost';
-    $dbname = 'update-tracker';
+    $dbname = 'update-tracker1';
     $user = 'root';
     $pass = '';
     $error = 0;
@@ -79,7 +79,7 @@ if (isset($_POST['Save'])) {
 		$query = "UPDATE users SET Username=:Username, Email=:Email, Password=:Password WHERE ID=:ID";
 		$stmt = $db->prepare($query);
 
-		$stmt->bindValue(":Username", $Username, PDO::PARAM_STR);
+		$stmt->bindValue(":Username", $username, PDO::PARAM_STR);
 		$stmt->bindValue(":Email", $email, PDO::PARAM_STR);
 		$stmt->bindValue(":Password", $password_3, PDO::PARAM_STR);
 		$stmt->bindValue(":ID", $_GET['User_ID'], PDO::PARAM_STR);
@@ -106,7 +106,7 @@ if (isset($_POST['Save'])) {
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 	<meta charset="UTF-8">
-	<title>Home</title>
+	<title>Edit</title>
 </head>
 <ul>
 	<li><a href="index.php"><i class="material-icons">home</i></a></li>

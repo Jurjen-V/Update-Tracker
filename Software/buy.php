@@ -10,7 +10,7 @@ if (isset($_GET['logout'])) {
     header("location: ../index.php");
 }
 $dbhost = 'localhost';
-$dbname = 'update-tracker';
+$dbname = 'update-tracker1';
 $user = 'root';
 $pass = ''; 
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);

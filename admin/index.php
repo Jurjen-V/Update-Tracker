@@ -10,7 +10,7 @@ if (isset($_GET['logout'])) {
     header("location: ../index.php");
 }
 $dbhost = 'localhost';
-$dbname = 'update-tracker';
+$dbname = 'update-tracker1';
 $user = 'root';
 $pass = ''; 
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
@@ -21,11 +21,12 @@ for($i=0; $row = $result_users->fetch(); $i++){
 }	
 if(isset($_GET['users_id'])){
     $query = "
-    alter table usersoftware nocheck constraint all
 	DELETE FROM users WHERE ID={$_GET['users_id']}";
     $insert = $db->prepare($query);
     $insert->execute();
-    ?><script>window.location.href = "index.php";</script><?php
+    ?>
+    <!-- <script>window.location.href = "index.php";</script> -->
+    <?php
 }
 ?>
 <!DOCTYPE html>
@@ -66,7 +67,10 @@ if(isset($_GET['users_id'])){
 	   	echo "<td>" . $row['Email'] . "</td>";
 	    echo "<td>" . $row['Password'] . "</td>";
 	    echo "
-   			<td><a class='link' href=view.php?User_ID=". $id."><i class='material-icons'>remove_red_eye</i></a><a class='link' href=edit.php?User_ID=". $id."><i class='material-icons'>edit</i></a><a class='link'href='?users_id=". $id ."'><i class='material-icons'>delete</i></a></td>";
+   			<td>
+   			<a class='link' href=view.php?User_ID=". $id."><i class='material-icons'>remove_red_eye</i></a>
+   			<a class='link' href=edit.php?User_ID=". $id."><i class='material-icons'>edit</i></a>
+   			<a class='link'href='?users_id=". $id ."'><i class='material-icons'>delete</i></a></td>";
 	    ?>
 	<?php } ?>
 	</tbody>

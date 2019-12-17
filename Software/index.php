@@ -9,8 +9,9 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
+$User_ID= $_SESSION['id'];
 $dbhost = 'localhost';
-$dbname = 'update-tracker';
+$dbname = 'update-tracker1';
 $user = 'root';
 $pass = ''; 
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
@@ -19,11 +20,13 @@ $result_users->execute();
 for($i=0; $row = $result_users->fetch(); $i++){
 	$id = $row['ID'];
 }	
-if(isset($_GET['software_id'])){
-    $query = "DELETE FROM usersoftware WHERE KoppelID={$_GET['software_id']}";
+if(isset($_GET['ID'])){
+    $query = "DELETE FROM usersoftware WHERE usersoftwareID={$_GET['ID']}";
     $insert = $db->prepare($query);
     $insert->execute();
-    ?><script>window.location.href = "index.php";</script><?php
+    ?>
+    <script>window.location.href = "index.php";</script>
+    <?php
 }
 ?>
 <!DOCTYPE html>
@@ -38,7 +41,7 @@ if(isset($_GET['software_id'])){
 </head>
 <ul>
 	<li><a href="index.php"><i class="material-icons">home</i></a></li>
-	<li><a href="profile.php?edit_id=<?php echo $id ?>"><i class="material-icons">person</i></a></li>
+	<li><a href="profile.php?edit_id=<?php echo $User_ID ?>"><i class="material-icons">person</i></a></li>
 	<li><a href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
@@ -52,16 +55,16 @@ if(isset($_GET['software_id'])){
 	          <th>Software version</th>
 	          <th>Actions</th>
 	        </tr>";
-	  $result_projects = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = Software.ID WHERE User_ID = ". $id);
+	  $result_projects = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = Software.ID WHERE User_ID = ". $User_ID);
 
 	  $result_projects->execute();
 	  for($i=0; $row = $result_projects->fetch(); $i++){
-	    $id = $row['KoppelID'];
+	    $id = $row['usersoftwareID'];
 	    echo "<tr>";
 	    echo "<td>" . $row['Software'] . "</td>";
-	    echo "<td>" . $row['Version'] . "</td>";
+	    echo "<td>" . $row['Current_Version'] . "</td>";
 	    echo "
-   			<td><a class='link' href=edit.php?KoppelID=". $id."><i class='material-icons'>edit</i></a><a class='link'href='?software_id=". $id ."'><i class='material-icons'>delete</i></a></td>";
+   			<td><a class='link' href=edit.php?ID=". $id."><i class='material-icons'>edit</i></a><a class='link'href='?ID=". $id ."'><i class='material-icons'>delete</i></a></td>";
 	    ?>
 	<?php } ?>
 	</tbody>

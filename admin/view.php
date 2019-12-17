@@ -10,7 +10,7 @@ if (isset($_GET['logout'])) {
     header("location: ../index.php");
 }
 $dbhost = 'localhost';
-$dbname = 'update-tracker';
+$dbname = 'update-tracker1';
 $user = 'root';
 $pass = ''; 
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
@@ -31,13 +31,12 @@ for($i=0; $row = $result_user->fetch(); $i++){
 	}
 	$id = $row['ID'];
 }	
-if(isset($_GET['users_id'])){
-    $query = "
-    alter table usersoftware nocheck constraint all
-	DELETE FROM users WHERE ID={$_GET['users_id']}";
+if(isset($_GET['usersoftwareID'])){
+    $query = "DELETE FROM usersoftware WHERE usersoftwareID={$_GET['usersoftwareID']}";
     $insert = $db->prepare($query);
     $insert->execute();
-    ?><script>window.location.href = "index.php";</script><?php
+    $User_ID = $_GET['User_ID'];
+    header('Location:view.php?User_ID='. $User_ID);	
 }
 ?>
 <!DOCTYPE html>
@@ -72,11 +71,13 @@ if(isset($_GET['users_id'])){
 	  $result_projects->execute();
 	  for($i=0; $row = $result_projects->fetch(); $i++){
 	    $id = $row['ID'];
+	    $usersoftwareID = $row['usersoftwareID'];
 	    echo "<tr>";
 	    echo "<td>" . $row['Software'] . "</td>";
-	   	echo "<td>" . $row['Version'] . "</td>";
+	   	echo "<td>" . $row['Current_Version'] . "</td>";
 	    echo "
-   			<td><a class='link' href=edit.php?User_ID=". $id."><i class='material-icons'>edit</i></a><a class='link'href='?users_id=". $id ."'><i class='material-icons'>delete</i></a></td>";
+   			<td><a class='link' href=edit_software.php?usersoftwareID=". $usersoftwareID."&User_ID={$_GET['User_ID']}><i class='material-icons'>edit</i></a>
+   				<a class='link' href=?usersoftwareID=". $usersoftwareID."&User_ID={$_GET['User_ID']}><i class='material-icons'>delete</i></a></td>";
 	    ?>
 	<?php } ?>
 	</tbody>

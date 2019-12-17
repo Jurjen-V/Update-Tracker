@@ -20,13 +20,14 @@ for($i=0; $row = $result_users->fetch(); $i++){
 	$id = $row['ID'];
 }	
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
-$result_software = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = Software.ID WHERE usersoftware.usersoftwareID = " . $_GET['ID']);
+$result_software = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = Software.ID WHERE usersoftwareID = " . $_GET['usersoftwareID']);
 $result_software->execute();
 for($i=0; $row = $result_software->fetch(); $i++){
-	$ID = $row['usersoftwareID'];
+	$usersoftwareID = $row['usersoftwareID'];
 	$Software = $row['Software'];
 	$Versie = $row['Version'];
 }	
+$User_ID = $_GET['User_ID'];
 
 if(isset($_POST['Save'])) {
 
@@ -60,10 +61,10 @@ if(isset($_POST['Save'])) {
         echo $e->getMessage();
     }
     if ($error == 0) {
-    $query = "UPDATE usersoftware SET Software_ID=:Software_ID, Current_Version=:Current_Version WHERE usersoftwareID= :ID";
+    $query = "UPDATE usersoftware SET Software_ID=:Software_ID, Current_Version=:Current_Version WHERE usersoftwareID= :usersoftwareID";
     $stmt = $db->prepare($query);
 
-    $stmt->bindValue(":ID", $ID, PDO::PARAM_STR);
+    $stmt->bindValue(":usersoftwareID", $usersoftwareID, PDO::PARAM_STR);
 	$stmt->bindValue(":Software_ID", $Software_ID, PDO::PARAM_STR);
 	$stmt->bindValue(":Current_Version", $Current_Version, PDO::PARAM_STR);
 
@@ -73,7 +74,7 @@ if(isset($_POST['Save'])) {
     catch (PDOException $e) {
         echo $e->getMessage();
     }
-    header('Location:index.php');	
+    header('Location:view.php?User_ID='. $User_ID);	
     }else{
     	echo $errorMessage;
     }

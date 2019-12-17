@@ -1,17 +1,19 @@
 <?php
 session_start();
-$connect = mysqli_connect('localhost', 'root', '', 'update-tracker') or die("Opps some thing went wrong");
+$connect = mysqli_connect('localhost', 'root', '', 'update-tracker1') or die("Opps some thing went wrong");
 	 if (isset($_POST['login_user'])) {
 		 extract($_POST);
 		// Get Old Password from Database which is having unique userName
 		$sqlQuery = mysqli_query($connect, "select * from users where username='$username'");
 		$res = mysqli_fetch_array($sqlQuery);
 		$current_password = $res['Password'];
-		echo $admin = $res['Admin'];
+		$id = $res['ID'];
+		$admin = $res['Admin'];
 		$enteredPassword = $_POST["password"];
 		if (password_verify($enteredPassword, $current_password)) {
 			 	/* If Password is valid!! */
 			 	$_SESSION['username'] = $username;
+			 	$_SESSION['id'] = $id;
 		 		$_SESSION['success'] = "You are now logged in";
 		 		if($admin == 0){
 		 			header('location: software/index.php');

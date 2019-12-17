@@ -10,35 +10,39 @@ if (isset($_GET['logout'])) {
     header("location: ../index.php");
 }
 $dbhost = 'localhost';
-$dbname = 'update-tracker';
+$dbname = 'update-tracker1';
 $user = 'root';
 $pass = ''; 
+$User= $_SESSION['id'];
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
-$result_users = $db->prepare("SELECT * FROM users");
+$result_users = $db->prepare("SELECT * FROM users where ID=".$User);
 $result_users->execute();
 for($i=0; $row = $result_users->fetch(); $i++){
 	$id = $row['ID'];
+	$betaald= $row['Paying'];
 }	
-if(isset($_POST['Save'])) {
+$result_software = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = Software.ID WHERE User_ID = ". $User);
+$result_software->execute();
+$count = $result_software->rowCount();
+if($betaald == 0 && $count >= 2){
+	echo "Je hebt je max aantal bereikt";
+}else{
+	if(isset($_POST['Save'])) {
 
 	$dbhost = 'localhost';
-    $dbname = 'update-tracker';
+    $dbname = 'update-tracker1';
     $user = 'root';
     $pass = '';
 	$error = 0;
 
-
 	if (isset($_POST['Software_ID'])){
 	    $Software_ID = htmlspecialchars($_POST['Software_ID']);
-
 	}else{
 	    $error++;
 	    $errorMessage = "Software naam is leeg";
 	}
-
 	if (isset($_POST['Versie'])){
-	    $Versie = htmlspecialchars($_POST['Versie']);
-
+	    $Current_Version = htmlspecialchars($_POST['Versie']);
 	}else{
 	    $error++;
 	    $errorMessage = "Software versie is leeg";
@@ -51,23 +55,25 @@ if(isset($_POST['Save'])) {
         echo $e->getMessage();
     }
     if ($error == 0) {
-    $User_ID = $id;
-    $query = "INSERT INTO usersoftware (User_ID, Software_ID) VALUES (?, ?)";
-    $insert = $database->prepare($query);
+	    $User_ID = $_SESSION['id'];
+	    $query = "INSERT INTO usersoftware (User_ID, Software_ID, Current_Version) VALUES (?, ?, ?)";
+	    $insert = $database->prepare($query);
 
-    $data = array("$User_ID", "$Software_ID");
-    try {
-        $insert->execute($data);
-    }
-    catch (PDOException $e) {
-        throw $e;
-    }
-    header('Location:index.php');
-    }else{
-    	echo $error;
-    	echo $errorMessage;
-    }
+	    $data = array("$User_ID", "$Software_ID", "$Current_Version");
+	    try {
+	        $insert->execute($data);
+	    }
+	    catch (PDOException $e) {
+	        throw $e;
+	    }
+	    header('Location:index.php');
+	    }else{
+	    	echo $error;
+	    	echo $errorMessage;
+    	}
+	}
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

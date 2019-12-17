@@ -3,7 +3,7 @@
   $email = "";
   if(isset($_POST['Sign-up'])) {
     $dbhost = 'localhost';
-    $dbname = 'update-tracker';
+    $dbname = 'update-tracker1';
     $user = 'root';
     $pass = '';
     $error = 0;
