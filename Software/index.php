@@ -32,6 +32,7 @@ if(isset($_GET['ID'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="icon" href="../img/capture.ico">
 	<link rel="stylesheet" type="text/css" href="../css/home.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -68,9 +69,36 @@ if(isset($_GET['ID'])){
 	    ?>
 	<?php } ?>
 	</tbody>
-	<div class="buy_div">
-		<h2 class="buy">Meer software toevoegen? <button onclick="window.location.href = 'buy.php';" id="buy" class="btn waves-effect waves-light" type="submit" name="buy">Buy</button></h2>
+	<?php
+	$result_user = $db->prepare("SELECT * FROM users WHERE ID =".$User_ID);
+	$result_user->execute();
+	for($i=0; $row = $result_user->fetch(); $i++){
+		$betaald = $row['Paying'];
+		if($betaald == 0){
+			?>
+			<div class="buy_div">
+				<h2 class="buy">Meer software toevoegen? <button onclick="window.location.href = 'buy.php';" id="buy" class="btn waves-effect waves-light" type="submit" name="buy">Buy</button></h2>
+			</div><?php
+		}else{
+			$betaald = "Ja";
+		}
+		$id = $row['ID'];
+	}	
+	?>
 
-	</div>
 </body>
 </html>
+<?php
+$result_usersoftware = $db->prepare("SELECT * FROM users INNER JOIN usersoftware on User_ID = users.ID INNER JOIN software on usersoftware.Software_ID = software.ID WHERE User_ID = ".$User_ID);
+$result_usersoftware->execute();
+for($i=0; $row = $result_usersoftware->fetch(); $i++){
+	// echo "Current_Version: " .$Current_Version = $row['Current_Version'] . $software= $row['Software'] ."<br>";
+	// echo "Software version: " . $version = $row['Version']. "<br>";
+	$Current_Version = $row['Current_Version'];
+	$version = $row['Version'];
+	if($Current_Version !==  $version){
+		echo "not the same <br>";
+	}else{
+		echo "same";
+	}
+}	

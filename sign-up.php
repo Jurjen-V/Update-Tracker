@@ -1,4 +1,4 @@
-<?php  
+  <?php  
   $username = "";
   $email = "";
   if(isset($_POST['Sign-up'])) {

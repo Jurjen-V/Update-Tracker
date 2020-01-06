@@ -14,6 +14,7 @@ $dbname = 'update-tracker1';
 $user = 'root';
 $pass = ''; 
 $User= $_SESSION['id'];
+$error = 0;
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 $result_users = $db->prepare("SELECT * FROM users where ID=".$User);
 $result_users->execute();
@@ -25,7 +26,14 @@ $result_software = $db->prepare("SELECT * FROM usersoftware INNER JOIN software 
 $result_software->execute();
 $count = $result_software->rowCount();
 if($betaald == 0 && $count >= 2){
-	echo "Je hebt je max aantal bereikt";
+	$error++;
+	$errorMessage= "Je hebt je max aantal software bereikt";
+	?>
+	<div class="alert">
+		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+		<strong>Let op!</strong> <?php echo $errorMessage ?>
+	</div>
+	<?php
 }else{
 	if(isset($_POST['Save'])) {
 
@@ -33,7 +41,7 @@ if($betaald == 0 && $count >= 2){
     $dbname = 'update-tracker1';
     $user = 'root';
     $pass = '';
-	$error = 0;
+
 
 	if (isset($_POST['Software_ID'])){
 	    $Software_ID = htmlspecialchars($_POST['Software_ID']);
@@ -68,8 +76,12 @@ if($betaald == 0 && $count >= 2){
 	    }
 	    header('Location:index.php');
 	    }else{
-	    	echo $error;
-	    	echo $errorMessage;
+	    	?>
+	    	<div class="alert">
+			  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+			  <strong>Let op!</strong> <?php echo $errorMessage ?>
+			</div>
+			<?php
     	}
 	}
 }
@@ -78,12 +90,13 @@ if($betaald == 0 && $count >= 2){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="icon" href="../img/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../css/add.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 	<meta charset="UTF-8">
-	<title>Home</title>
+	<title>Add software</title>
 </head>
 <ul>
 	<li><a href="index.php"><i class="material-icons">home</i></a></li>

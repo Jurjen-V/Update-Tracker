@@ -94,12 +94,13 @@ $result = $db->prepare("SELECT * FROM users WHERE id =" . $_GET['edit_id']);
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="icon" href="../img/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../css/profile.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 	<meta charset="UTF-8">
-	<title>Home</title>
+	<title>Profile</title>
 </head>
 <ul>
 	<li><a href="index.php"><i class="material-icons">home</i></a></li>

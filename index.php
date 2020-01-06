@@ -14,6 +14,7 @@ $connect = mysqli_connect('localhost', 'root', '', 'update-tracker1') or die("Op
 			 	/* If Password is valid!! */
 			 	$_SESSION['username'] = $username;
 			 	$_SESSION['id'] = $id;
+			 	$_SESSION['level'] = $admin;
 		 		$_SESSION['success'] = "You are now logged in";
 		 		if($admin == 0){
 		 			header('location: software/index.php');

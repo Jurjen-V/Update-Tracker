@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['username']) || $_SESSION['level'] == 0) {
 	$_SESSION['msg'] = "You must log in first";
     header('location: ../index.php');
 }
@@ -32,6 +32,7 @@ if(isset($_GET['users_id'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="icon" href="../img/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../css/home.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
