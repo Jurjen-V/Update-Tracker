@@ -95,49 +95,48 @@ $result = $db->prepare("SELECT * FROM users WHERE id =" . $_GET['edit_id']);
 <html lang="en">
 <head>
 	<link rel="icon" href="../img/favicon.ico">
-	<link rel="stylesheet" type="text/css" href="../css/profile.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>Profile</title>
 </head>
 <ul>
 	<li><a href="index.php"><i class="material-icons">home</i></a></li>
-	<li><a href="profile.php?edit_id=<?php echo $id ?>"><i class="material-icons">person</i></a></li>
+	<li><a class="active" href="profile.php?edit_id=<?php echo $id ?>"><i class="material-icons">person</i></a></li>
 	<li><a href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 <body>
-	<h1 class="update">Update<div class="tracker">Tracker</h1>
 	<div class="row">
-	<form class="col s12" id="form" action="" method="post">
+	<form class="col s12" id="add-edit" action="" method="post">
 		<div class="row">
-			<div class="input-field col s12" id="username">
+			<div class="input-field col s12" id="Softwarename">
 				<input type="text" name="username" value="<?= $Username; ?>" >
 				<label for="Username">Username</label>
 			</div>
 		</div>
 		<div class="row">
-			<div class="input-field col s12" id="e-mail">
+			<div class="input-field col s12" id="Versie">
 				<input type="email" name="email" value="<?= $Email; ?>">
           		<label for="E-mail">E-mail address</label>
 			</div>
 		</div>
 		<div class="row">
-			<div class="input-field col s12" id="password">
+			<div class="input-field col s12" id="Versie">
 				<input type="password" name="password_1" value="<?= $Password; ?>">
           		<label for="Password">Password</label>
 			</div>
 		</div>
 		<div class="row">
-			<div class="input-field col s12" id="password">
+			<div class="input-field col s12" id="Versie">
 				<input type="password" name="password_2">
           		<label for="Password">Password</label>
 			</div>
 		</div>
 		<div class="input-group">
-			<button id="Sign-up" class="btn waves-effect waves-light" type="submit" name="Save">Save</button>
+			<button id="Button" class="btn waves-effect waves-light" type="submit" name="Save">Save</button>
 		</div>
 	</form>
 	</div>

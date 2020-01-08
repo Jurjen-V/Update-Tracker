@@ -38,10 +38,11 @@ if(isset($_GET['users_id'])){
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>Home</title>
 </head>
 <ul>
-	<li><a href="index.php"><i class="material-icons">home</i></a></li>
+	<li><a class="active" href="index.php"><i class="material-icons">home</i></a></li>
 	<li><a href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
@@ -49,12 +50,12 @@ if(isset($_GET['users_id'])){
 	<h1 class="update">Update<div class="tracker">Tracker</h1>
 	<?php
 	echo "
-	      <table class='Software' id='project_table'>
+	      <table class='Software' id='user_table'>
 	        <tr id='head'>
 	          <th>ID</th>
 	          <th>Username</th>
-	          <th>E-mail</th>
-	          <th>Password</th>
+	          <th class='th'>E-mail</th>
+	          <th class='th'>Password</th>
 	          <th>Actions</th>
 	        </tr>";
 	  $result_projects = $db->prepare("SELECT * FROM users");
@@ -65,8 +66,8 @@ if(isset($_GET['users_id'])){
 	    echo "<tr>";
 	  	echo "<td>" . $id . "</td>";
 	    echo "<td>" . $row['Username'] . "</td>";
-	   	echo "<td>" . $row['Email'] . "</td>";
-	    echo "<td>" . $row['Password'] . "</td>";
+	   	echo "<td class='th'>" . $row['Email'] . "</td>";
+	    echo "<td class='th'>" . $row['Password'] . "</td>";
 	    echo "
    			<td>
    			<a class='link' href=view.php?User_ID=". $id."><i class='material-icons'>remove_red_eye</i></a>

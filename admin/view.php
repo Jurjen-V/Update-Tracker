@@ -43,15 +43,15 @@ if(isset($_GET['usersoftwareID'])){
 <html lang="en">
 <head>
 	<link rel="icon" href="../img/favicon.ico">
-	<link rel="stylesheet" type="text/css" href="../css/view.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>View user</title>
 </head>
 <ul>
-	<li><a href="index.php"><i class="material-icons">home</i></a></li>
+	<li><a class="active" href="index.php"><i class="material-icons">home</i></a></li>
 	<li><a href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>

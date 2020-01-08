@@ -83,11 +83,11 @@ if(isset($_POST['Save'])) {
 <html lang="en">
 <head>
 	<link rel="icon" href="../img/favicon.ico">
-	<link rel="stylesheet" type="text/css" href="../css/add.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>Edit software</title>
 </head>
 <ul>
@@ -97,10 +97,10 @@ if(isset($_POST['Save'])) {
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 	<div class="row">
-	<form class="col s12" id="form" action="" method="post">
-		<h1 class="update">Update<div class="tracker">Tracker</h1>
+	<h1 class="update">Update<div class="tracker">Tracker</h1>
+	<form class="col s12" id="add-edit" action="" method="post">
 		<div class='row'>
-	        <div class='input-field col s12' id='Softwarenaam'>
+	        <div class='input-field col s12' id='Softwarename'>
 	          <select name='Software_ID' >
 	            <option value="" disabled selected>Kies software uit</option>
 	            <?php 
@@ -128,7 +128,7 @@ if(isset($_POST['Save'])) {
 	         </div>
         </div>
 		<div class="input-group">
-			<button id="Buy" class="btn waves-effect waves-light" type="submit" name="Save">Save</button>
+			<button id="Button" class="btn waves-effect waves-light" type="submit" name="Save">Save</button>
 		</div>
 	</form>
 	</div>

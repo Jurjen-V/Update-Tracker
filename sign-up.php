@@ -85,7 +85,6 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-  <link rel="stylesheet" href="css/Sign-up.css">
   <link rel="stylesheet" href="css/style.css">
 
   <!--Let browser know website is optimized for mobile-->
@@ -123,7 +122,7 @@
 			</div>
 		</div>
 		<div class="input-group">
-			<button id="Sign-up" class="btn waves-effect waves-light" type="submit" name="Sign-up">Sign-up</button>
+			<button id="login" class="btn waves-effect waves-light" type="submit" name="Sign-up">Sign-up</button>
 		</div>
 	</form>
 	</div>

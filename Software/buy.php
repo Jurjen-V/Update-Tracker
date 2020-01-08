@@ -9,22 +9,37 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
-$dbhost = 'localhost';
-$dbname = 'update-tracker1';
-$user = 'root';
-$pass = ''; 
-$db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
-$result_users = $db->prepare("SELECT * FROM users");
-$result_users->execute();
-for($i=0; $row = $result_users->fetch(); $i++){
-	$id = $row['ID'];
-}	
+if(isset($_POST['Buy'])) {
+
+	$dbhost = 'localhost';
+	$dbname = 'update-tracker1';
+	$user = 'root';
+	$pass = '';
+	try {
+	    $database = new PDO("mysql:host=$dbhost;dbname=$dbname", $user, $pass);
+	    $database->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+		$User_ID = $_SESSION['id'];
+		echo $sql = "UPDATE users SET Paying= 1 WHERE ID=".$User_ID;
+		$stmt = $database->prepare($sql);
+
+		$stmt->execute();
+
+		echo $stmt->rowCount() . " records UPDATED successfully";
+    }
+	catch(PDOException $e)
+    {
+    	echo $sql . "<br>" . $e->getMessage();
+    }
+
+	$conn = null;
+	header('Location:index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<link rel="icon" href="../img/favicon.ico">
-	<link rel="stylesheet" type="text/css" href="../css/buy.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
@@ -38,22 +53,21 @@ for($i=0; $row = $result_users->fetch(); $i++){
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 	<div class="row">
-	<form class="col s12" id="form" action="" method="post">
-		<h1 class="update">Update<div class="tracker">Tracker</h1>
+	<form class="col s12" id="add-edit" action="" method="post">
 		<div class="row">
-			<div class="input-field col s12" id="Rekening-nummer">
+			<div class="input-field col s12" id="Softwarename">
 				<input type="text" name="Rekening nummer" >
 				<label for="Rekening nummer">Rekening nummer</label>
 			</div>
 		</div>
 		<div class="row">
-			<div class="input-field col s12" id="Passnummer">
+			<div class="input-field col s12" id="Versie">
 				<input type="text" name="Passnummer">
           		<label for="Passnummer">Passnummer</label>
 			</div>
 		</div>
 		<div class="row">
-			<div class="input-field col s12" id="Bank">
+			<div class="input-field col s12" id="Versie">
 		    <select name="Bank">
 		      <option value="" disabled selected>Choose your option</option>
 		      <option value="Rabobank">Rabobank</option>
@@ -64,7 +78,7 @@ for($i=0; $row = $result_users->fetch(); $i++){
 		  </div>
 		</div>
 		<div class="input-group">
-			<button id="Buy" class="btn waves-effect waves-light" type="submit" name="Buy">Buy</button>
+			<button id="Button" class="btn waves-effect waves-light" type="submit" name="Buy">Buy</button>
 		</div>
 	</form>
 	</div>

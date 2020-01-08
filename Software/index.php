@@ -33,15 +33,15 @@ if(isset($_GET['ID'])){
 <html lang="en">
 <head>
 	<link rel="icon" href="../img/capture.ico">
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Home</title>
 </head>
 <ul>
-	<li><a href="index.php"><i class="material-icons">home</i></a></li>
+	<li><a class="active" href="index.php"><i class="material-icons">home</i></a></li>
 	<li><a href="profile.php?edit_id=<?php echo $User_ID ?>"><i class="material-icons">person</i></a></li>
 	<li><a href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
@@ -97,8 +97,8 @@ for($i=0; $row = $result_usersoftware->fetch(); $i++){
 	$Current_Version = $row['Current_Version'];
 	$version = $row['Version'];
 	if($Current_Version !==  $version){
-		echo "not the same <br>";
+		// echo "not the same <br>";
 	}else{
-		echo "same";
+		// echo "same <br>";
 	}
 }	
