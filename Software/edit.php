@@ -9,10 +9,14 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
-$dbhost = 'localhost';
-$dbname = 'update-tracker1';
-$user = 'root';
-$pass = ''; 
+// $dbhost = 'localhost';
+// $dbname = 'update-tracker1';
+// $user = 'root';
+// $pass = ''; 
+$dbhost = "rdbms.strato.de";
+$dbname = "DB4001610";
+$user = "U4001610";
+$pass = "XYymJZVP8i!LC52";
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 $result_users = $db->prepare("SELECT * FROM users");
 $result_users->execute();
@@ -20,7 +24,7 @@ for($i=0; $row = $result_users->fetch(); $i++){
 	$id = $row['ID'];
 }	
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
-$result_software = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = Software.ID WHERE usersoftware.usersoftwareID = " . $_GET['ID']);
+$result_software = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = software.ID WHERE usersoftware.usersoftwareID = " . $_GET['ID']);
 $result_software->execute();
 for($i=0; $row = $result_software->fetch(); $i++){
 	$ID = $row['usersoftwareID'];
@@ -30,10 +34,14 @@ for($i=0; $row = $result_software->fetch(); $i++){
 
 if(isset($_POST['Save'])) {
 
-	$dbhost = 'localhost';
-    $dbname = 'update-tracker1';
-    $user = 'root';
-    $pass = '';
+	// $dbhost = 'localhost';
+ //    $dbname = 'update-tracker1';
+ //    $user = 'root';
+ //    $pass = '';
+	$dbhost = "rdbms.strato.de";
+$dbname = "DB4001610";
+$user = "U4001610";
+$pass = "XYymJZVP8i!LC52";
 	$error = 0;
 
 

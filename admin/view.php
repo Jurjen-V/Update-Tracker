@@ -9,10 +9,14 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
-$dbhost = 'localhost';
-$dbname = 'update-tracker1';
-$user = 'root';
-$pass = ''; 
+// $dbhost = 'localhost';
+// $dbname = 'update-tracker1';
+// $user = 'root';
+// $pass = ''; 
+$dbhost = "rdbms.strato.de";
+$dbname = "DB4001610";
+$user = "U4001610";
+$pass = "XYymJZVP8i!LC52";
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 $result_users = $db->prepare("SELECT * FROM users");
 $result_users->execute();
@@ -52,13 +56,11 @@ if(isset($_GET['usersoftwareID'])){
 </head>
 <ul>
 	<li><a class="active" href="index.php"><i class="material-icons">home</i></a></li>
-	<li><a href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
+	<li><a href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 <body>
 	<h1 class="update">Update<div class="tracker">Tracker</h1>
-	<p class="userinfo">User: <?php echo $username?></p>
-	<p class="userinfo1">Betaald: <?php echo $betaald?></p>
 	<?php
 	echo "
 	      <table class='Software' id='project_table'>
@@ -67,7 +69,7 @@ if(isset($_GET['usersoftwareID'])){
 	          <th>Version</th>
 	          <th>Actions</th>
 	        </tr>";
-	  $result_projects = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = Software.ID WHERE User_ID ={$_GET['User_ID']}");
+	  $result_projects = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = software.ID WHERE User_ID ={$_GET['User_ID']}");
 
 	  $result_projects->execute();
 	  for($i=0; $row = $result_projects->fetch(); $i++){
@@ -81,6 +83,8 @@ if(isset($_GET['usersoftwareID'])){
    				<a class='link' href=?usersoftwareID=". $usersoftwareID."&User_ID={$_GET['User_ID']}><i class='material-icons'>delete</i></a></td>";
 	    ?>
 	<?php } ?>
+	<p class="userinfo">User: <?php echo $username?></p>
+	<p class="userinfo1">Betaald: <?php echo $betaald?></p>
 	</tbody>
 </body>
 </html>

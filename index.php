@@ -1,10 +1,11 @@
 <?php
 session_start();
-$connect = mysqli_connect('localhost', 'root', '', 'update-tracker1') or die("Opps some thing went wrong");
+// $connect = mysqli_connect('localhost', 'root', '', 'update-tracker1') or die("Opps some thing went wrong");
+$connect = mysqli_connect('rdbms.strato.de', 'U4001610', 'XYymJZVP8i!LC52', 'DB4001610') or die("Opps some thing went wrong");
 	 if (isset($_POST['login_user'])) {
 		 extract($_POST);
 		// Get Old Password from Database which is having unique userName
-		$sqlQuery = mysqli_query($connect, "select * from users where username='$username'");
+		$sqlQuery = mysqli_query($connect, "select * from users where Username='$username'");
 		$res = mysqli_fetch_array($sqlQuery);
 		$current_password = $res['Password'];
 		$id = $res['ID'];
@@ -17,7 +18,7 @@ $connect = mysqli_connect('localhost', 'root', '', 'update-tracker1') or die("Op
 			 	$_SESSION['level'] = $admin;
 		 		$_SESSION['success'] = "You are now logged in";
 		 		if($admin == 0){
-		 			header('location: software/index.php');
+		 			header('location: Software/index.php');
 		 		}else{
 		 			header('location: admin/index.php');
 		 		}
@@ -38,7 +39,6 @@ $connect = mysqli_connect('localhost', 'root', '', 'update-tracker1') or die("Op
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-  <link rel="stylesheet" href="css/Login.css">
   <link rel="stylesheet" href="css/style.css">
 
   <!--Let browser know website is optimized for mobile-->

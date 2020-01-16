@@ -9,23 +9,29 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
-$dbhost = 'localhost';
-$dbname = 'update-tracker1';
-$user = 'root';
-$pass = ''; 
+// $dbhost = 'localhost';
+// $dbname = 'update-tracker1';
+// $user = 'root';
+// $pass = ''; 
+$dbhost = "rdbms.strato.de";
+$dbname = "DB4001610";
+$user = "U4001610";
+$pass = "XYymJZVP8i!LC52";
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 $result_users = $db->prepare("SELECT * FROM users");
 $result_users->execute();
 for($i=0; $row = $result_users->fetch(); $i++){
   $id = $row['ID'];
 } 
-  $username = "";
-  $email = "";
   if(isset($_POST['Sign-up'])) {
-    $dbhost = 'localhost';
-    $dbname = 'update-tracker1';
-    $user = 'root';
-    $pass = '';
+    // $dbhost = 'localhost';
+    // $dbname = 'update-tracker1';
+    // $user = 'root';
+    // $pass = '';
+    $dbhost = "rdbms.strato.de";
+    $dbname = "DB4001610";
+    $user = "U4001610";
+    $pass = "XYymJZVP8i!LC52";
     $error = 0;
 
     try {
@@ -37,7 +43,7 @@ for($i=0; $row = $result_users->fetch(); $i++){
     }
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $query = "SELECT * FROM users WHERE username= :username OR email= :email LIMIT 1";
+    $query = "SELECT * FROM users WHERE Username= :username OR Email= :email LIMIT 1";
     $stmt = $database->prepare($query);
     $results = $stmt->execute(array(":username" => $username, ":email" => $email));
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -79,12 +85,13 @@ for($i=0; $row = $result_users->fetch(); $i++){
     }else{
       $error++;
     }
+    $admin = htmlspecialchars($_POST['admin']);
       
-      if ($error == 0) {
-        $query = "INSERT INTO users (Username, Email, password) VALUES (?, ?, ?)";
+      if ($error === 0) {
+        $query = "INSERT INTO users (Username, Email, Password ,Admin) VALUES (?, ?, ?, ?)";
         $insert = $database->prepare($query);
 
-        $data = array("$username", "$email", "$password_3");
+        $data = array("$username", "$email", "$password_3", "$admin");
         try {
             $insert->execute($data);
         }
@@ -110,12 +117,12 @@ for($i=0; $row = $result_users->fetch(); $i++){
 </head>
 <ul>
   <li><a href="index.php"><i class="material-icons">home</i></a></li>
-  <li><a class="active" href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
+  <li><a class="active" href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
   <li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 <body>
 	<div class="row">
-  <h1 class="update">Update<div class="tracker">Tracker</h1>
+  <!-- <h1 class="update">Update<div class="tracker">Tracker</h1> -->
 	<form class="col s12" id="add-edit" action="" method="post">
 		<div class="row">
 			<div class="input-field col s12" id="Softwarename">
@@ -141,6 +148,14 @@ for($i=0; $row = $result_users->fetch(); $i++){
           		<label for="Password">Password</label>
 			</div>
 		</div>
+    <div class="row">
+      <div class="input-field col s12" id="Versie" >
+        <label>
+          <input type="checkbox" name="admin" value="1" />
+          <span>Admin?</span>
+        </label>
+      </div>
+    </div>
 		<div class="input-group">
 			<button id="Button" class="btn waves-effect waves-light" type="submit" name="Sign-up">Sign-up</button>
 		</div>

@@ -1,3 +1,9 @@
+.input-group{
+  float: right;
+}
+.login_body{
+  background: url("../img/Login.jpg") no-repeat fixed center;
+}
 /*Nav*/
 body{
   margin: 0px;
@@ -71,10 +77,10 @@ tr:nth-child(even){
 }
 
 .buy{
-  position: absolute;
+  /*position: relative;*/
   display: block;
   right: 100px;
-  bottom: 10px;
+  margin-top: 45.373rem;
   margin-right: 10%;
   font-size: 24px;
 }
@@ -220,7 +226,7 @@ tr:nth-child(even){
 }
 @media only screen and (max-width: 600px) {
   ul{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     display: flex;
@@ -249,7 +255,7 @@ tr:nth-child(even){
   #Softwarename{
     margin-left: 0%;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   #Versie{
     margin-left: 0%;
@@ -272,7 +278,7 @@ tr:nth-child(even){
   #add-edit{
     background-color: white;  
     width: 80%;
-    height: 60%;
+    height: auto;
     position: absolute;
     top: 15%;
     left: 10%;
@@ -314,27 +320,26 @@ tr:nth-child(even){
     font-size: 24px;
     margin-left: 5%;
   }
-  #project_table{
-    top: 20%; 
+  #project_table{ 
     width: 100%;
     right: 0%;
-    top: 20%;
+    top: 5%;
   }
   .th{
     display: none;  
   }
   .buy{
-    position: absolute;
     display: block;
+    position: absolute;
     bottom: 10%;  
     margin-right: 0%;
-    font-size: 21px;
+    font-size: 14px;
     width: 100%;
     right: 0%;
   }
   #buy{
-    width: 20%;
-    font-size: 21px;
+    width: 15%;
+    font-size: 14px;
     height: 40px;
   }
 }

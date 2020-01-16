@@ -9,10 +9,14 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
-$dbhost = 'localhost';
-$dbname = 'update-tracker1';
-$user = 'root';
-$pass = ''; 
+// $dbhost = 'localhost';
+// $dbname = 'update-tracker1';
+// $user = 'root';
+// $pass = ''; 
+$dbhost = "rdbms.strato.de";
+$dbname = "DB4001610";
+$user = "U4001610";
+$pass = "XYymJZVP8i!LC52";
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 $result = $db->prepare("SELECT * FROM users WHERE id =" . $_GET['edit_id']);
    	$result->execute();
@@ -23,10 +27,14 @@ $result = $db->prepare("SELECT * FROM users WHERE id =" . $_GET['edit_id']);
     	$password = $row['Password'];
 	}
  if (isset($_POST['Save'])) {
-    $dbhost = 'localhost';
-    $dbname = 'update-tracker1';
-    $user = 'root';
-    $pass = '';
+ //    $dbhost = 'localhost';
+ //    $dbname = 'update-tracker1';
+ //    $user = 'root';
+ //    $pass = '';
+	$dbhost = "rdbms.strato.de";
+	$dbname = "DB4001610";
+	$user = "U4001610";
+	$pass = "XYymJZVP8i!LC52";
     $error = 0;
 
 	if (isset($_POST['username'])) {
@@ -105,7 +113,7 @@ $result = $db->prepare("SELECT * FROM users WHERE id =" . $_GET['edit_id']);
 <ul>
 	<li><a href="index.php"><i class="material-icons">home</i></a></li>
 	<li><a class="active" href="profile.php?edit_id=<?php echo $id ?>"><i class="material-icons">person</i></a></li>
-	<li><a href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
+	<li><a href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 <body>

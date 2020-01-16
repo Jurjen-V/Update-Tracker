@@ -2,10 +2,14 @@
   $username = "";
   $email = "";
   if(isset($_POST['Sign-up'])) {
-    $dbhost = 'localhost';
-    $dbname = 'update-tracker1';
-    $user = 'root';
-    $pass = '';
+    $dbhost = "rdbms.strato.de";
+    $dbname = "DB4001610";
+    $user = "U4001610";
+    $pass = "XYymJZVP8i!LC52";
+    // $dbhost = 'localhost';
+    // $dbname = 'update-tracker1';
+    // $user = 'root';
+    // $pass = '';
     $error = 0;
 
     try {
@@ -17,7 +21,7 @@
     }
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $query = "SELECT * FROM users WHERE username= :username OR email= :email LIMIT 1";
+    $query = "SELECT * FROM users WHERE Username= :username OR Email= :email LIMIT 1";
     $stmt = $database->prepare($query);
     $results = $stmt->execute(array(":username" => $username, ":email" => $email));
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -71,6 +75,7 @@
         catch (PDOException $e) {
             throw $e;
         }
+        echo "Succes";
         header('Location:index.php');
       }else{
         echo "Er is iets misgegaan";

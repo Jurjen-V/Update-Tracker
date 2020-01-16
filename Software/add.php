@@ -9,10 +9,14 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
-$dbhost = 'localhost';
-$dbname = 'update-tracker1';
-$user = 'root';
-$pass = ''; 
+// $dbhost = 'localhost';
+// $dbname = 'update-tracker1';
+// $user = 'root';
+// $pass = ''; 
+$dbhost = "rdbms.strato.de";
+$dbname = "DB4001610";
+$user = "U4001610";
+$pass = "XYymJZVP8i!LC52";
 $User= $_SESSION['id'];
 $error = 0;
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
@@ -37,11 +41,14 @@ if($betaald == 0 && $count >= 2){
 }else{
 	if(isset($_POST['Save'])) {
 
-	$dbhost = 'localhost';
-    $dbname = 'update-tracker1';
-    $user = 'root';
-    $pass = '';
-
+	// $dbhost = 'localhost';
+ //    $dbname = 'update-tracker1';
+ //    $user = 'root';
+ //    $pass = '';
+$dbhost = "rdbms.strato.de";
+$dbname = "DB4001610";
+$user = "U4001610";
+$pass = "XYymJZVP8i!LC52";
 
 	if (isset($_POST['Software_ID'])){
 	    $Software_ID = htmlspecialchars($_POST['Software_ID']);
@@ -101,7 +108,7 @@ if($betaald == 0 && $count >= 2){
 <ul>
 	<li><a href="index.php"><i class="material-icons">home</i></a></li>
 	<li><a href="profile.php?edit_id=<?php echo $id ?>"><i class="material-icons">person</i></a></li>
-	<li><a class="active" href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
+	<li><a class="active" href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 	<div class="row">

@@ -10,10 +10,15 @@ if (isset($_GET['logout'])) {
     header("location: ../index.php");
 }
 $User_ID= $_SESSION['id'];
-$dbhost = 'localhost';
-$dbname = 'update-tracker1';
-$user = 'root';
-$pass = ''; 
+// $dbhost = 'localhost';
+// $dbname = 'update-tracker1';
+// $user = 'root';
+// $pass = ''; 
+$dbhost = "rdbms.strato.de";
+$dbname = "DB4001610";
+$user = "U4001610";
+$pass = "XYymJZVP8i!LC52";
+
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 $result_users = $db->prepare("SELECT * FROM users");
 $result_users->execute();
@@ -43,7 +48,7 @@ if(isset($_GET['ID'])){
 <ul>
 	<li><a class="active" href="index.php"><i class="material-icons">home</i></a></li>
 	<li><a href="profile.php?edit_id=<?php echo $User_ID ?>"><i class="material-icons">person</i></a></li>
-	<li><a href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
+	<li><a href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 <body>
@@ -56,7 +61,7 @@ if(isset($_GET['ID'])){
 	          <th>Software version</th>
 	          <th>Actions</th>
 	        </tr>";
-	  $result_projects = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = Software.ID WHERE User_ID = ". $User_ID);
+	  $result_projects = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = software.ID WHERE User_ID = ". $User_ID);
 
 	  $result_projects->execute();
 	  for($i=0; $row = $result_projects->fetch(); $i++){
@@ -75,30 +80,15 @@ if(isset($_GET['ID'])){
 	for($i=0; $row = $result_user->fetch(); $i++){
 		$betaald = $row['Paying'];
 		if($betaald == 0){
-			?>
-			<div class="buy_div">
-				<h2 class="buy">Meer software toevoegen? <button onclick="window.location.href = 'buy.php';" id="buy" class="btn waves-effect waves-light" type="submit" name="buy">Buy</button></h2>
-			</div><?php
+			?><div class='buy_div'>
+				<h2 class='buy'>Meer software toevoegen? <button onclick="window.location.href = 'buy.php';" id='buy' class='btn waves-effect waves-light' type='submit' name='buy'>Buy</button></h2>
+			</div>
+			<?php
 		}else{
 			$betaald = "Ja";
 		}
 		$id = $row['ID'];
 	}	
 	?>
-
 </body>
 </html>
-<?php
-$result_usersoftware = $db->prepare("SELECT * FROM users INNER JOIN usersoftware on User_ID = users.ID INNER JOIN software on usersoftware.Software_ID = software.ID WHERE User_ID = ".$User_ID);
-$result_usersoftware->execute();
-for($i=0; $row = $result_usersoftware->fetch(); $i++){
-	// echo "Current_Version: " .$Current_Version = $row['Current_Version'] . $software= $row['Software'] ."<br>";
-	// echo "Software version: " . $version = $row['Version']. "<br>";
-	$Current_Version = $row['Current_Version'];
-	$version = $row['Version'];
-	if($Current_Version !==  $version){
-		// echo "not the same <br>";
-	}else{
-		// echo "same <br>";
-	}
-}	
