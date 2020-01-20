@@ -46,7 +46,7 @@ if(isset($_POST['Save'])) {
 	$error = 0;
 
 
-	if (isset($_POST['Software_ID'])){
+	if (!empty($_POST['Software_ID'])){
 	    $Software_ID = htmlspecialchars($_POST['Software_ID']);
 
 	}else{
@@ -54,7 +54,7 @@ if(isset($_POST['Save'])) {
 	    $errorMessage = "Software naam is leeg";
 	}
 
-	if (isset($_POST['Versie'])){
+	if (!empty($_POST['Versie'])){
 	    $Current_Version = htmlspecialchars($_POST['Versie']);
 
 	}else{

@@ -11,10 +11,14 @@ if (isset($_GET['logout'])) {
 }
 if(isset($_POST['Buy'])) {
 
-	$dbhost = 'localhost';
-	$dbname = 'update-tracker1';
-	$user = 'root';
-	$pass = '';
+	// $dbhost = 'localhost';
+	// $dbname = 'update-tracker1';
+	// $user = 'root';
+	// $pass = '';
+	$dbhost = "rdbms.strato.de";
+	$dbname = "DB4001610";
+	$user = "U4001610";
+	$pass = "XYymJZVP8i!LC52";
 	try {
 	    $database = new PDO("mysql:host=$dbhost;dbname=$dbname", $user, $pass);
 	    $database->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);

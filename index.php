@@ -9,15 +9,15 @@ $connect = mysqli_connect('rdbms.strato.de', 'U4001610', 'XYymJZVP8i!LC52', 'DB4
 		$res = mysqli_fetch_array($sqlQuery);
 		$current_password = $res['Password'];
 		$id = $res['ID'];
-		$admin = $res['Admin'];
+		$Level = $res['Level'];
 		$enteredPassword = $_POST["password"];
 		if (password_verify($enteredPassword, $current_password)) {
 			 	/* If Password is valid!! */
 			 	$_SESSION['username'] = $username;
 			 	$_SESSION['id'] = $id;
-			 	$_SESSION['level'] = $admin;
+			 	$_SESSION['level'] = $Level;
 		 		$_SESSION['success'] = "You are now logged in";
-		 		if($admin == 0){
+		 		if($Level == 0){
 		 			header('location: Software/index.php');
 		 		}else{
 		 			header('location: admin/index.php');

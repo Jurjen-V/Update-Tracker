@@ -50,40 +50,47 @@ for($i=0; $row = $result_users->fetch(); $i++){
     if ($user) { // if user exists
       if ($user['username'] === $username) {
         $error++;
+        $errorMSG= "Username already excist";
       }
       if ($user['email'] === $email) {
         $error++;
+        $errorMSG= "Email already excist";
       }
     }
-    if (isset($_POST['username'])){
+    if (!empty($_POST['username'])){
         $username = htmlspecialchars($_POST['username']);
 
     }else{
         $error++;
+        $errorMSG= "Username empty";
     }
 
-    if (isset($_POST['email'])){
+    if (!empty($_POST['email'])){
         $email = htmlspecialchars($_POST['email']);
 
     }else{
         $error++;
+        $errorMSG= "Email empty";
     }
-    if (isset($_POST['password_1'])){
+    if (!empty($_POST['password_1'])){
         $password_1 = htmlspecialchars($_POST['password_1']);
 
     }else{
         $error++;
+        $errorMSG= "Password empty";
     }
-    if (isset($_POST['password_2'])){
+    if (!empty($_POST['password_2'])){
         $password_2 = htmlspecialchars($_POST['password_2']);
 
     }else{
         $error++;
+        $errorMSG= "Password empty";
     }
     if($password_1 == $password_2){
       $password_3 = $password_3 = password_hash($password_1, PASSWORD_DEFAULT);
     }else{
       $error++;
+      $errorMSG= "Password needs to be the same";
     }
     $admin = htmlspecialchars($_POST['admin']);
       
@@ -100,7 +107,7 @@ for($i=0; $row = $result_users->fetch(); $i++){
         }
         header('Location:index.php');
       }else{
-        echo "Er is iets misgegaan";
+        echo $errorMSG;
       }
   }
 ?>

@@ -233,7 +233,9 @@ tr:nth-child(even){
     justify-content: space-around;
     text-align: center;
     list-style-type: none;
-    padding:0px  20px 0px 20px;
+  }
+  body{
+      height: calc( 100vh + 50px ); /* Used in this example to enable scrolling */
   }
   /*Logo*/
   .update{
@@ -249,8 +251,8 @@ tr:nth-child(even){
   .Software{
     width: 100%;
     right: 0%;
-    top: 10%;
-    position: absolute;
+    margin-top: 10%;
+    position: initial;
   } 
   #Softwarename{
     margin-left: 0%;
@@ -278,7 +280,7 @@ tr:nth-child(even){
   #add-edit{
     background-color: white;  
     width: 80%;
-    height: auto;
+    height: 60%;
     position: absolute;
     top: 15%;
     left: 10%;

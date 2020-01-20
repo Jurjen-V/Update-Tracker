@@ -37,7 +37,7 @@ if(isset($_GET['ID'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="icon" href="../img/capture.ico">
+	<link rel="icon" href="../img/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>

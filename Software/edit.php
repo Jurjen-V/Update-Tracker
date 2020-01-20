@@ -45,7 +45,7 @@ $pass = "XYymJZVP8i!LC52";
 	$error = 0;
 
 
-	if (isset($_POST['Software_ID'])){
+	if (!empty($_POST['Software_ID'])){
 	    $Software_ID = htmlspecialchars($_POST['Software_ID']);
 
 	}else{
@@ -53,7 +53,7 @@ $pass = "XYymJZVP8i!LC52";
 	    $errorMessage = "Software naam is leeg";
 	}
 
-	if (isset($_POST['Versie'])){
+	if (!empty($_POST['Versie'])){
 	    $Current_Version = htmlspecialchars($_POST['Versie']);
 
 	}else{
@@ -101,11 +101,10 @@ $pass = "XYymJZVP8i!LC52";
 <ul>
 	<li><a href="index.php"><i class="material-icons">home</i></a></li>
 	<li><a href="profile.php?edit_id=<?php echo $id ?>"><i class="material-icons">person</i></a></li>
-	<li><a href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
+	<li><a href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 	<div class="row">
-	<h1 class="update">Update<div class="tracker">Tracker</h1>
 	<form class="col s12" id="add-edit" action="" method="post">
 		<div class='row'>
 	        <div class='input-field col s12' id='Softwarename'>
@@ -132,7 +131,7 @@ $pass = "XYymJZVP8i!LC52";
 	                echo "<option value=". $row['Version']. ">" . $row['Version'] . "</option>";
 	              }?>
 	            </select>
-	            <label>Veriets</label>
+	            <label>Verie</label>
 	         </div>
         </div>
 		<div class="input-group">

@@ -37,27 +37,27 @@ $result = $db->prepare("SELECT * FROM users WHERE id =" . $_GET['edit_id']);
 	$pass = "XYymJZVP8i!LC52";
     $error = 0;
 
-	if (isset($_POST['username'])) {
+	if (!empty($_POST['username'])) {
 	    $username = htmlspecialchars($_POST['username']);
 	}else{
 	    $error++;
 	    $errorMessage = "Er ging iets mis bij de username";
 	}
 
-	if (isset($_POST['email'])) {
+	if (!empty($_POST['email'])) {
 		$email = htmlspecialchars($_POST['email']);
 	}else{
 		$error++;
 		$errorMessage = "Er ging iets mis bij de email";
 	}
 
-	if (isset($_POST['password_1'])) {
+	if (!empty($_POST['password_1'])) {
 		$password_1 = htmlspecialchars($_POST['password_1']);
 	}else{
 		$error++;
 		$errorMessage = "Er ging iets mis bij het wachtwoord";
 	}
-	if (isset($_POST['password_2'])) {
+	if (!empty($_POST['password_2'])) {
 		$password_2 = htmlspecialchars($_POST['password_2']);
 	}else{
 		$error++;

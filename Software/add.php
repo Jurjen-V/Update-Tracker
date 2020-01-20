@@ -50,13 +50,13 @@ $dbname = "DB4001610";
 $user = "U4001610";
 $pass = "XYymJZVP8i!LC52";
 
-	if (isset($_POST['Software_ID'])){
+	if (!empty($_POST['Software_ID'])){
 	    $Software_ID = htmlspecialchars($_POST['Software_ID']);
 	}else{
 	    $error++;
 	    $errorMessage = "Software naam is leeg";
 	}
-	if (isset($_POST['Versie'])){
+	if (!empty($_POST['Versie'])){
 	    $Current_Version = htmlspecialchars($_POST['Versie']);
 	}else{
 	    $error++;
@@ -112,7 +112,6 @@ $pass = "XYymJZVP8i!LC52";
 	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 	<div class="row">
-	<h1 class="update">Update<div class="tracker">Tracker</h1>
 	<form class="col s12" id="add-edit" action="" method="post">
 		<div class='row'>
 	        <div class='input-field col s12' id='Softwarename'>
@@ -139,7 +138,7 @@ $pass = "XYymJZVP8i!LC52";
 	                echo "<option value=". $row['Version']. ">" . $row['Version'] . "</option>";
 	              }?>
 	            </select>
-	            <label>Veriets</label>
+	            <label>Verie</label>
 	         </div>
         </div>
 		<div class="input-group">

@@ -1,6 +1,4 @@
-  <?php  
-  $username = "";
-  $email = "";
+  <?php 
   if(isset($_POST['Sign-up'])) {
     $dbhost = "rdbms.strato.de";
     $dbname = "DB4001610";
@@ -10,6 +8,7 @@
     // $dbname = 'update-tracker1';
     // $user = 'root';
     // $pass = '';
+
     $error = 0;
 
     try {
@@ -28,44 +27,50 @@
     if ($user) { // if user exists
       if ($user['username'] === $username) {
         $error++;
+        $errorMSG= "Username already excist";
       }
       if ($user['email'] === $email) {
         $error++;
+        $errorMSG= "Email already excist";
       }
     }
-    if (isset($_POST['username'])){
+    if (empty($_POST['username'])){
         $username = htmlspecialchars($_POST['username']);
 
     }else{
         $error++;
+        $errorMSG= "Username empty";
     }
 
-    if (isset($_POST['email'])){
+    if (empty($_POST['email'])){
         $email = htmlspecialchars($_POST['email']);
 
     }else{
         $error++;
+        $errorMSG= "Email empty";
     }
-    if (isset($_POST['password_1'])){
+    if (empty($_POST['password_1'])){
         $password_1 = htmlspecialchars($_POST['password_1']);
 
     }else{
         $error++;
+        $errorMSG= "Password empty";
     }
-    if (isset($_POST['password_2'])){
+    if (empty($_POST['password_2'])){
         $password_2 = htmlspecialchars($_POST['password_2']);
 
     }else{
         $error++;
+        $errorMSG= "Password empty";
     }
     if($password_1 == $password_2){
       $password_3 = $password_3 = password_hash($password_1, PASSWORD_DEFAULT);
     }else{
       $error++;
+      $errorMSG= "Password needs to be the same";
     }
-      
-      if ($error == 0) {
-        $query = "INSERT INTO users (Username, Email, password) VALUES (?, ?, ?)";
+      if ($error === 0) {
+        $query = "INSERT INTO users (Username, Email, Password) VALUES (?, ?, ?)";
         $insert = $database->prepare($query);
 
         $data = array("$username", "$email", "$password_3");
@@ -75,28 +80,22 @@
         catch (PDOException $e) {
             throw $e;
         }
-        echo "Succes";
         header('Location:index.php');
       }else{
-        echo "Er is iets misgegaan";
+        echo $errorMSG;
       }
   }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!--Import Google Icon Font-->
-  <link rel="icon" href="img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-  <link rel="stylesheet" href="css/style.css">
-
-  <!--Let browser know website is optimized for mobile-->
+  <link type="text/css" rel="stylesheet" href="./css/materialize.min.css"  media="screen,projection"/>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sign-up</title>
-  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-  <meta content="utf-8" http-equiv="encoding">
 </head>
 <body class="login_body">
 	<div class="row">
