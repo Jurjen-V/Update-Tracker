@@ -11,33 +11,56 @@ if (isset($_GET['logout'])) {
 }
 if(isset($_POST['Buy'])) {
 
-	// $dbhost = 'localhost';
-	// $dbname = 'update-tracker1';
-	// $user = 'root';
-	// $pass = '';
-	$dbhost = "rdbms.strato.de";
-	$dbname = "DB4001610";
-	$user = "U4001610";
-	$pass = "XYymJZVP8i!LC52";
-	try {
-	    $database = new PDO("mysql:host=$dbhost;dbname=$dbname", $user, $pass);
-	    $database->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-		$User_ID = $_SESSION['id'];
-		echo $sql = "UPDATE users SET Paying= 1 WHERE ID=".$User_ID;
-		$stmt = $database->prepare($sql);
-
-		$stmt->execute();
-
-		echo $stmt->rowCount() . " records UPDATED successfully";
+	$dbhost = 'localhost';
+	$dbname = 'update-tracker1';
+	$user = 'root';
+	$pass = '';
+	$error = 0;
+	// $dbhost = "rdbms.strato.de";
+	// $dbname = "DB4001610";
+	// $user = "U4001610";
+	// $pass = "XYymJZVP8i!LC52";
+	if (!empty($_POST['Rekeningnummer'])) {
+	   	$Rekeningnummer = htmlspecialchars($_POST['Rekeningnummer']);
+	}else{
+	    $error++;
+	    $errorMSG= "Rekeningnummer empty";
     }
-	catch(PDOException $e)
-    {
-    	echo $sql . "<br>" . $e->getMessage();
+    if (!empty($_POST['Passnummer'])) {
+	   	$Passnummer = htmlspecialchars($_POST['Passnummer']);
+	}else{
+	    $error++;
+	    $errorMSG= "Passnummer empty";
     }
+    if (!empty($_POST['Bank'])) {
+	   	$Bank = htmlspecialchars($_POST['Bank']);
+	}else{
+	    $error++;
+	    $errorMSG= "Bank empty";
+    }
+    if ($error === 0) {
+    	try {
+			$database = new PDO("mysql:host=$dbhost;dbname=$dbname", $user, $pass);
+			$database->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+			$User_ID = $_SESSION['id'];
+			$sql = "UPDATE users SET Paying= 1 WHERE ID=".$User_ID;
+			$stmt = $database->prepare($sql);
 
-	$conn = null;
-	header('Location:index.php');
+			$stmt->execute();
+   		}
+		catch(PDOException $e)
+		{
+		    echo $sql . "<br>" . $e->getMessage();
+		}
+		$conn = null;
+		header('Location:index.php');
+	}else{
+        ?>
+        <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+          <strong>Let op!</strong> <?php echo $errorMSG ?>
+        </div><?php
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -61,7 +84,7 @@ if(isset($_POST['Buy'])) {
 	<form class="col s12" id="add-edit" action="" method="post">
 		<div class="row">
 			<div class="input-field col s12" id="Softwarename">
-				<input type="text" name="Rekening nummer" >
+				<input type="text" name="Rekeningnummer" >
 				<label for="Rekening nummer">Rekening nummer</label>
 			</div>
 		</div>

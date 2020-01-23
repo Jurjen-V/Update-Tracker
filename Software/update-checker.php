@@ -1,12 +1,12 @@
 <?php
-// $dbhost = 'localhost';
-// $dbname = 'update-tracker1';
-// $user = 'root';
-// $pass = ''; 
-$dbhost = "rdbms.strato.de";
-$dbname = "DB4001610";
-$user = "U4001610";
-$pass = "XYymJZVP8i!LC52";
+$dbhost = 'localhost';
+$dbname = 'update-tracker1';
+$user = 'root';
+$pass = ''; 
+// $dbhost = "rdbms.strato.de";
+// $dbname = "DB4001610";
+// $user = "U4001610";
+// $pass = "XYymJZVP8i!LC52";
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 
 if(isset($_GET['usersoftwareID'])){

@@ -1,7 +1,7 @@
 <?php
 session_start();
-// $connect = mysqli_connect('localhost', 'root', '', 'update-tracker1') or die("Opps some thing went wrong");
-$connect = mysqli_connect('rdbms.strato.de', 'U4001610', 'XYymJZVP8i!LC52', 'DB4001610') or die("Opps some thing went wrong");
+$connect = mysqli_connect('localhost', 'root', '', 'update-tracker1') or die("Opps some thing went wrong");
+// $connect = mysqli_connect('rdbms.strato.de', 'U4001610', 'XYymJZVP8i!LC52', 'DB4001610') or die("Opps some thing went wrong");
 	 if (isset($_POST['login_user'])) {
 		 extract($_POST);
 		// Get Old Password from Database which is having unique userName
@@ -9,7 +9,7 @@ $connect = mysqli_connect('rdbms.strato.de', 'U4001610', 'XYymJZVP8i!LC52', 'DB4
 		$res = mysqli_fetch_array($sqlQuery);
 		$current_password = $res['Password'];
 		$id = $res['ID'];
-		$Level = $res['Level'];
+		$Level = $res['Admin'];
 		$enteredPassword = $_POST["password"];
 		if (password_verify($enteredPassword, $current_password)) {
 			 	/* If Password is valid!! */
@@ -25,9 +25,13 @@ $connect = mysqli_connect('rdbms.strato.de', 'U4001610', 'XYymJZVP8i!LC52', 'DB4
 		}
 		else {
 			 /* If Invalid password Entered */
-			 $alt = "Login Failed! Wrong user ID or Password";
-			 echo $alt;
-			 // header("location: login.php?m=$alt");
+			 $alt = "Login Failed! Please try again";
+			 ?>
+			 <div class="alert1">
+				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+				<strong>Let op!</strong> <?php echo $alt ?>
+			</div>
+			<?php
 		}
  }
 ?>

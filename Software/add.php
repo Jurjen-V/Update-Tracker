@@ -9,24 +9,24 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
-// $dbhost = 'localhost';
-// $dbname = 'update-tracker1';
-// $user = 'root';
-// $pass = ''; 
-$dbhost = "rdbms.strato.de";
-$dbname = "DB4001610";
-$user = "U4001610";
-$pass = "XYymJZVP8i!LC52";
-$User= $_SESSION['id'];
+$dbhost = 'localhost';
+$dbname = 'update-tracker1';
+$user = 'root';
+$pass = ''; 
+// $dbhost = "rdbms.strato.de";
+// $dbname = "DB4001610";
+// $user = "U4001610";
+// $pass = "XYymJZVP8i!LC52";
+$User_id= $_SESSION['id'];
 $error = 0;
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
-$result_users = $db->prepare("SELECT * FROM users where ID=".$User);
+$result_users = $db->prepare("SELECT * FROM users where ID=".$User_id);
 $result_users->execute();
 for($i=0; $row = $result_users->fetch(); $i++){
 	$id = $row['ID'];
 	$betaald= $row['Paying'];
 }	
-$result_software = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = Software.ID WHERE User_ID = ". $User);
+$result_software = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = software.ID WHERE User_ID = ". $User_id);
 $result_software->execute();
 $count = $result_software->rowCount();
 if($betaald == 0 && $count >= 2){
@@ -41,14 +41,14 @@ if($betaald == 0 && $count >= 2){
 }else{
 	if(isset($_POST['Save'])) {
 
-	// $dbhost = 'localhost';
- //    $dbname = 'update-tracker1';
- //    $user = 'root';
- //    $pass = '';
-$dbhost = "rdbms.strato.de";
-$dbname = "DB4001610";
-$user = "U4001610";
-$pass = "XYymJZVP8i!LC52";
+	$dbhost = 'localhost';
+    $dbname = 'update-tracker1';
+    $user = 'root';
+    $pass = '';
+// $dbhost = "rdbms.strato.de";
+// $dbname = "DB4001610";
+// $user = "U4001610";
+// $pass = "XYymJZVP8i!LC52";
 
 	if (!empty($_POST['Software_ID'])){
 	    $Software_ID = htmlspecialchars($_POST['Software_ID']);

@@ -89,7 +89,7 @@ tr:nth-child(even){
   border-radius: 10px;
   text-transform: capitalize;
   height: 50px;
-  width: 20%;
+  /*width: 20%;*/
 }
 .userinfo{
   margin-top: 150px;
@@ -149,7 +149,13 @@ tr:nth-child(even){
   background-color: #f44336;
   color: white;
 }
-
+.alert1 {
+  position: absolute;
+  width: 100%;
+  padding: 15px;
+  background-color: #f44336;
+  color: white;
+}
 .closebtn {
   margin-left: 15px;
   color: white;

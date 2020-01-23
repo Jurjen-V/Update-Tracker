@@ -9,14 +9,14 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
-// $dbhost = 'localhost';
-// $dbname = 'update-tracker1';
-// $user = 'root';
-// $pass = ''; 
-$dbhost = "rdbms.strato.de";
-$dbname = "DB4001610";
-$user = "U4001610";
-$pass = "XYymJZVP8i!LC52";
+$dbhost = 'localhost';
+$dbname = 'update-tracker1';
+$user = 'root';
+$pass = ''; 
+// $dbhost = "rdbms.strato.de";
+// $dbname = "DB4001610";
+// $user = "U4001610";
+// $pass = "XYymJZVP8i!LC52";
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 $result = $db->prepare("SELECT * FROM users WHERE id =" . $_GET['edit_id']);
    	$result->execute();
@@ -27,14 +27,14 @@ $result = $db->prepare("SELECT * FROM users WHERE id =" . $_GET['edit_id']);
     	$password = $row['Password'];
 	}
  if (isset($_POST['Save'])) {
- //    $dbhost = 'localhost';
- //    $dbname = 'update-tracker1';
- //    $user = 'root';
- //    $pass = '';
-	$dbhost = "rdbms.strato.de";
-	$dbname = "DB4001610";
-	$user = "U4001610";
-	$pass = "XYymJZVP8i!LC52";
+    $dbhost = 'localhost';
+    $dbname = 'update-tracker1';
+    $user = 'root';
+    $pass = '';
+	// $dbhost = "rdbms.strato.de";
+	// $dbname = "DB4001610";
+	// $user = "U4001610";
+	// $pass = "XYymJZVP8i!LC52";
     $error = 0;
 
 	if (!empty($_POST['username'])) {
