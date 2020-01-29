@@ -9,14 +9,14 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
-$dbhost = 'localhost';
-$dbname = 'update-tracker1';
-$user = 'root';
-$pass = ''; 
-// $dbhost = "rdbms.strato.de";
-// $dbname = "DB4001610";
-// $user = "U4001610";
-// $pass = "XYymJZVP8i!LC52";
+// $dbhost = 'localhost';
+// $dbname = 'update-tracker1';
+// $user = 'root';
+// $pass = ''; 
+$dbhost = "rdbms.strato.de";
+$dbname = "DB4001610";
+$user = "U4001610";
+$pass = "XYymJZVP8i!LC52";
 
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 $result_users = $db->prepare("SELECT * FROM users");
@@ -47,9 +47,9 @@ if(isset($_GET['users_id'])){
 	<title>Home</title>
 </head>
 <ul>
-	<li><a class="active" href="index.php"><i class="material-icons">home</i></a></li>
-	<li><a href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
-	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
+	<li><a title="Home" class="active" href="index.php"><i class="material-icons">home</i></a></li>
+	<li><a title="Add user" href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
+	<li class="right"><a title="Sign off" href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 <body>
 	<h1 class="update">Update<div class="tracker">Tracker</h1>
@@ -60,7 +60,7 @@ if(isset($_GET['users_id'])){
 	          <th>ID</th>
 	          <th>Username</th>
 	          <th class='th'>E-mail</th>
-	          <th class='th'>Password</th>
+	          <th>Paying?</th>
 	          <th>Actions</th>
 	        </tr>";
 	  $result_projects = $db->prepare("SELECT * FROM users");
@@ -72,7 +72,7 @@ if(isset($_GET['users_id'])){
 	  	echo "<td>" . $id . "</td>";
 	    echo "<td>" . $row['Username'] . "</td>";
 	   	echo "<td class='th'>" . $row['Email'] . "</td>";
-	    echo "<td class='th'>" . $row['Password'] . "</td>";
+	   	echo "<td>". $row['Paying']. "</td>";
 	    echo "
    			<td>
    			<a class='link' href=view.php?User_ID=". $id."><i class='material-icons'>remove_red_eye</i></a>

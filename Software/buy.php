@@ -11,15 +11,15 @@ if (isset($_GET['logout'])) {
 }
 if(isset($_POST['Buy'])) {
 
-	$dbhost = 'localhost';
-	$dbname = 'update-tracker1';
-	$user = 'root';
-	$pass = '';
+	// $dbhost = 'localhost';
+	// $dbname = 'update-tracker1';
+	// $user = 'root';
+	// $pass = '';
 	$error = 0;
-	// $dbhost = "rdbms.strato.de";
-	// $dbname = "DB4001610";
-	// $user = "U4001610";
-	// $pass = "XYymJZVP8i!LC52";
+	$dbhost = "rdbms.strato.de";
+	$dbname = "DB4001610";
+	$user = "U4001610";
+	$pass = "XYymJZVP8i!LC52";
 	if (!empty($_POST['Rekeningnummer'])) {
 	   	$Rekeningnummer = htmlspecialchars($_POST['Rekeningnummer']);
 	}else{
@@ -75,10 +75,10 @@ if(isset($_POST['Buy'])) {
 	<title>Buy</title>
 </head>
 <ul>
-	<li><a href="index.php"><i class="material-icons">home</i></a></li>
-	<li><a href="profile.php?edit_id=<?php echo $id ?>"><i class="material-icons">person</i></a></li>
-	<li><a href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
-	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
+	<li><a title="Home" href="index.php"><i class="material-icons">home</i></a></li>
+	<li><a title="Profile" href="profile.php?edit_id=<?php echo $id ?>"><i class="material-icons">person</i></a></li>
+	<li><a title="Add software" href="Add.php"><i class="material-icons">add_circle_outline</i></a></li>
+	<li class="right"><a title="Sign off" href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 	<div class="row">
 	<form class="col s12" id="add-edit" action="" method="post">

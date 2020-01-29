@@ -9,14 +9,14 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
-$dbhost = 'localhost';
-$dbname = 'update-tracker1';
-$user = 'root';
-$pass = ''; 
-// $dbhost = "rdbms.strato.de";
-// $dbname = "DB4001610";
-// $user = "U4001610";
-// $pass = "XYymJZVP8i!LC52";
+// $dbhost = 'localhost';
+// $dbname = 'update-tracker1';
+// $user = 'root';
+// $pass = ''; 
+$dbhost = "rdbms.strato.de";
+$dbname = "DB4001610";
+$user = "U4001610";
+$pass = "XYymJZVP8i!LC52";
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 $result_users = $db->prepare("SELECT * FROM users");
 $result_users->execute();
@@ -24,14 +24,6 @@ for($i=0; $row = $result_users->fetch(); $i++){
   $id = $row['ID'];
 } 
   if(isset($_POST['Sign-up'])) {
-    $dbhost = 'localhost';
-    $dbname = 'update-tracker1';
-    $user = 'root';
-    $pass = '';
-    // $dbhost = "rdbms.strato.de";
-    // $dbname = "DB4001610";
-    // $user = "U4001610";
-    // $pass = "XYymJZVP8i!LC52";
     $error = 0;
 
     try {
@@ -86,6 +78,10 @@ for($i=0; $row = $result_users->fetch(); $i++){
         $error++;
         $errorMSG= "Password empty";
     }
+    if(strlen($password_1) < 10 || strlen($password_2) < 10){
+      $error++;
+      $errorMSG= "Password needs to me longer than 10 characters.";
+    }
     if($password_1 == $password_2){
       $password_3 = $password_3 = password_hash($password_1, PASSWORD_DEFAULT);
     }else{
@@ -123,9 +119,9 @@ for($i=0; $row = $result_users->fetch(); $i++){
   <title>Add user</title>
 </head>
 <ul>
-  <li><a href="index.php"><i class="material-icons">home</i></a></li>
-  <li><a class="active" href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
-  <li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
+  <li><a title="Home" href="index.php"><i class="material-icons">home</i></a></li>
+  <li><a title="Add user" class="active" href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
+  <li class="right"><a title="Sign off" href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 <body>
 	<div class="row">
@@ -145,13 +141,13 @@ for($i=0; $row = $result_users->fetch(); $i++){
 		</div>
 		<div class="row">
 			<div class="input-field col s12" id="Versie">
-				<input type="password" name="password_1">
+				<input minlength="10" type="password" name="password_1">
           		<label for="Password">Password</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s12" id="Versie">
-				<input type="password" name="password_2">
+				<input minlength="10" type="password" name="password_2">
           		<label for="Password">Password</label>
 			</div>
 		</div>

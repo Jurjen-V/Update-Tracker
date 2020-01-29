@@ -1,13 +1,13 @@
 <?php 
   if(isset($_POST['Sign-up'])) {
-    // $dbhost = "rdbms.strato.de";
-    // $dbname = "DB4001610";
-    // $user = "U4001610";
-    // $pass = "XYymJZVP8i!LC52";
-    $dbhost = 'localhost';
-    $dbname = 'update-tracker1';
-    $user = 'root';
-    $pass = '';
+    $dbhost = "rdbms.strato.de";
+    $dbname = "DB4001610";
+    $user = "U4001610";
+    $pass = "XYymJZVP8i!LC52";
+    // $dbhost = 'localhost';
+    // $dbname = 'update-tracker1';
+    // $user = 'root';
+    // $pass = '';
     $error = 0;
     try {
           $database = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
@@ -16,7 +16,7 @@
     catch (PDOException $e) {
           echo $e->getMessage();
     }
-    $username = $_POST['username'];
+    $username = $_POST['Username'];
     $email = $_POST['email'];
     $query = "SELECT * FROM users WHERE Username= :username OR Email= :email LIMIT 1";
     $stmt = $database->prepare($query);
@@ -32,8 +32,8 @@
         $errorMSG= "Email already excist";
       }
     }
-    if (!empty($_POST['username'])){
-        $username = htmlspecialchars($_POST['username']);
+    if (!empty($_POST['Username'])){
+        $username = htmlspecialchars($_POST['Username']);
 
     }else{
         $error++;
@@ -61,12 +61,17 @@
         $error++;
         $errorMSG= "Password empty";
     }
+    if(strlen($password_1) < 10 || strlen($password_2) < 10){
+      $error++;
+      $errorMSG= "Password needs to me longer than 10 characters.";
+    }
     if($password_1 == $password_2){
       $password_3 = $password_3 = password_hash($password_1, PASSWORD_DEFAULT);
     }else{
       $error++;
       $errorMSG= "Password needs to be the same";
     }
+
       if ($error === 0) {
         $query = "INSERT INTO users (Username, Email, Password) VALUES (?, ?, ?)";
         $insert = $database->prepare($query);
@@ -117,13 +122,13 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s12" id="password">
-				<input type="password" name="password_1">
+				<input minlength="10" type="password" name="password_1">
           		<label for="Password">Password</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s12" id="password">
-				<input type="password" name="password_2">
+				<input minlength="10" type="password" name="password_2">
           		<label for="Password">Password</label>
 			</div>
 		</div>

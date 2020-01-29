@@ -9,14 +9,14 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
-$dbhost = 'localhost';
-$dbname = 'update-tracker1';
-$user = 'root';
-$pass = ''; 
-// $dbhost = "rdbms.strato.de";
-// $dbname = "DB4001610";
-// $user = "U4001610";
-// $pass = "XYymJZVP8i!LC52";
+// $dbhost = 'localhost';
+// $dbname = 'update-tracker1';
+// $user = 'root';
+// $pass = ''; 
+$dbhost = "rdbms.strato.de";
+$dbname = "DB4001610";
+$user = "U4001610";
+$pass = "XYymJZVP8i!LC52";
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 $result_users = $db->prepare("SELECT * FROM users");
 $result_users->execute();
@@ -30,18 +30,10 @@ for($i=0; $row = $result_software->fetch(); $i++){
 	$ID = $row['usersoftwareID'];
 	$Software = $row['Software'];
 	$Versie = $row['Version'];
+	$Current_Version = $row["Current_Version"];
 }	
 
 if(isset($_POST['Save'])) {
-
-	$dbhost = 'localhost';
-    $dbname = 'update-tracker1';
-    $user = 'root';
-    $pass = '';
-// 	$dbhost = "rdbms.strato.de";
-// $dbname = "DB4001610";
-// $user = "U4001610";
-// $pass = "XYymJZVP8i!LC52";
 	$error = 0;
 
 
@@ -99,18 +91,17 @@ if(isset($_POST['Save'])) {
 	<title>Edit software</title>
 </head>
 <ul>
-	<li><a href="index.php"><i class="material-icons">home</i></a></li>
-	<li><a href="profile.php?edit_id=<?php echo $id ?>"><i class="material-icons">person</i></a></li>
-	<li><a href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
-	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
+	<li><a title="Home" href="index.php"><i class="material-icons">home</i></a></li>
+	<li><a title="Profile" href="profile.php?edit_id=<?php echo $id ?>"><i class="material-icons">person</i></a></li>
+	<li><a title="Add software" href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
+	<li class="right"><a title="Sign off" href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 	<div class="row">
 	<form class="col s12" id="add-edit" action="" method="post">
 		<div class='row'>
 	        <div class='input-field col s12' id='Softwarename'>
 	          <select name='Software_ID' >
-	            <option value="" disabled selected>Kies software uit</option>
-	            <?php 
+	          	<?php echo "<option value='' disabled selected>". $Software. "</option>";
 	              $result_users = $db->prepare("SELECT * FROM software");
 	              $result_users->execute();
 	              for ($i=0; $row = $result_users->fetch(); $i++) {
@@ -123,8 +114,7 @@ if(isset($_POST['Save'])) {
 		<div class='row'>
 	        <div class='input-field col s12' id='Versie'>
 	          <select name='Versie' >
-	            <option value="" disabled selected>Wat is uw huidige versie?</option>
-	            <?php 
+	            <?php echo "<option value='' disabled selected>". $Current_Version. "</option>";
 	              $result_users = $db->prepare("SELECT * FROM software");
 	              $result_users->execute();
 	              for ($i=0; $row = $result_users->fetch(); $i++) {

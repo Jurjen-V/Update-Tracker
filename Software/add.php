@@ -9,14 +9,14 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: ../index.php");
 }
-$dbhost = 'localhost';
-$dbname = 'update-tracker1';
-$user = 'root';
-$pass = ''; 
-// $dbhost = "rdbms.strato.de";
-// $dbname = "DB4001610";
-// $user = "U4001610";
-// $pass = "XYymJZVP8i!LC52";
+// $dbhost = 'localhost';
+// $dbname = 'update-tracker1';
+// $user = 'root';
+// $pass = ''; 
+$dbhost = "rdbms.strato.de";
+$dbname = "DB4001610";
+$user = "U4001610";
+$pass = "XYymJZVP8i!LC52";
 $User_id= $_SESSION['id'];
 $error = 0;
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
@@ -28,7 +28,7 @@ for($i=0; $row = $result_users->fetch(); $i++){
 }	
 $result_software = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = software.ID WHERE User_ID = ". $User_id);
 $result_software->execute();
-$count = $result_software->rowCount();
+$count = $result_software->rowCount();	
 if($betaald == 0 && $count >= 2){
 	$error++;
 	$errorMessage= "Je hebt je max aantal software bereikt";
@@ -40,15 +40,17 @@ if($betaald == 0 && $count >= 2){
 	<?php
 }else{
 	if(isset($_POST['Save'])) {
-
-	$dbhost = 'localhost';
-    $dbname = 'update-tracker1';
-    $user = 'root';
-    $pass = '';
-// $dbhost = "rdbms.strato.de";
-// $dbname = "DB4001610";
-// $user = "U4001610";
-// $pass = "XYymJZVP8i!LC52";
+    $Software_ID = $_POST['Software_ID'];
+    $query = "SELECT * FROM usersoftware WHERE Software_ID=:Software_ID AND User_id =:User_id LIMIT 1 ";
+    $stmt = $db->prepare($query);
+    $results = $stmt->execute(array(":Software_ID" => $Software_ID, ":User_id" => $User_id));
+    $software = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($software) { // if user exists
+      if ($software['Software_ID'] === $Software_ID) {
+        $error++;
+        $errorMessage= "This software is already in your list";
+      }
+    }
 
 	if (!empty($_POST['Software_ID'])){
 	    $Software_ID = htmlspecialchars($_POST['Software_ID']);
@@ -106,10 +108,10 @@ if($betaald == 0 && $count >= 2){
 	<title>Add software</title>
 </head>
 <ul>
-	<li><a href="index.php"><i class="material-icons">home</i></a></li>
-	<li><a href="profile.php?edit_id=<?php echo $id ?>"><i class="material-icons">person</i></a></li>
-	<li><a class="active" href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
-	<li class="right"><a href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
+	<li><a title="Home" href="index.php"><i class="material-icons">home</i></a></li>
+	<li><a title="Profile" href="profile.php?edit_id=<?php echo $id ?>"><i class="material-icons">person</i></a></li>
+	<li><a title="Add software" class="active" href="add.php"><i class="material-icons">add_circle_outline</i></a></li>
+	<li class="right"><a title="Sign off" href="?logout=1"><i class="material-icons">power_settings_new</i></a></li>
 </ul>
 	<div class="row">
 	<form class="col s12" id="add-edit" action="" method="post">
@@ -121,7 +123,7 @@ if($betaald == 0 && $count >= 2){
 	              $result_users = $db->prepare("SELECT * FROM software");
 	              $result_users->execute();
 	              for ($i=0; $row = $result_users->fetch(); $i++) {
-	                echo "<option value=". $row['ID']. ">" . $row['Software'] . "</option>";
+			            echo "<option value=". $row['ID']. ">" . $row['Software'] . "</option>";
 	              }?>
 	            </select>
 	            <label>Software naam</label>
