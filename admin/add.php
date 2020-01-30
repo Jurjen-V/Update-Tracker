@@ -103,8 +103,12 @@ for($i=0; $row = $result_users->fetch(); $i++){
         }
         header('Location:index.php');
       }else{
-        echo $errorMSG;
-      }
+        ?>
+        <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+          <strong>Let op!</strong> <?php echo $errorMSG ?>
+        </div><?php
+    }
   }
 ?>
 <!DOCTYPE html>

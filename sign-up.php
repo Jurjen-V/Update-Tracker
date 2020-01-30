@@ -83,7 +83,7 @@
         catch (PDOException $e) {
             throw $e;
         }
-        header('Location:index.php');
+        // header('Location:index.php');
       }else{
         ?>
         <div class="alert1">
@@ -135,6 +135,9 @@
 		<div class="input-group">
 			<button id="login" class="btn waves-effect waves-light" type="submit" name="Sign-up">Sign-up</button>
 		</div>
+    <div class="row">
+      <h2 class="not-a-user"><a href="index.php" class="Sign-up">Cancel</a></h2>
+    </div>
 	</form>
 	</div>
 </body>

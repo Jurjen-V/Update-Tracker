@@ -90,8 +90,11 @@ $result = $db->prepare("SELECT * FROM users WHERE id =" . $_GET['edit_id']);
 		}
 		header('location:index.php');
 
-	}else{
-		echo $errorMessage;	
+	}else{?>
+		<div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+          <strong>Let op!</strong> <?php echo $errorMessage ?>
+        </div><?php
 	}
 }
 ?>

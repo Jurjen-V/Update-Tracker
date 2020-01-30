@@ -74,8 +74,11 @@ if(isset($_POST['Save'])) {
         echo $e->getMessage();
     }
     header('Location:index.php');	
-    }else{
-    	echo $errorMessage;
+    }else{?>
+    	<div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+          <strong>Let op!</strong> <?php echo $errorMessage ?>
+        </div><?php
     }
 }
 ?>

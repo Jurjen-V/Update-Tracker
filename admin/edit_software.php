@@ -24,7 +24,7 @@ for($i=0; $row = $result_users->fetch(); $i++){
 	$id = $row['ID'];
 }	
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
-$result_software = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = Software.ID WHERE usersoftwareID = " . $_GET['usersoftwareID']);
+$result_software = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = software.ID WHERE usersoftware.usersoftwareID = " . $_GET['usersoftwareID']);
 $result_software->execute();
 for($i=0; $row = $result_software->fetch(); $i++){
 	$usersoftwareID = $row['usersoftwareID'];
