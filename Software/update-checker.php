@@ -10,7 +10,9 @@ $pass = "XYymJZVP8i!LC52";
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 
 if(isset($_GET['usersoftwareID'])){
-	$usersoftwareID =$_GET['usersoftwareID'];
+	$encodedUsersoftwareID =$_GET['usersoftwareID'];
+	$usersoftwareID = base64_decode($encodedUsersoftwareID);
+
 	$result_usersoftware = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = software.ID WHERE usersoftwareID =".$usersoftwareID);
 	$result_usersoftware->execute();
 	for($i=0; $row = $result_usersoftware->fetch(); $i++){
@@ -31,7 +33,7 @@ if(isset($_GET['usersoftwareID'])){
 	catch (PDOException $e) {
 			echo $e->getMessage();
 	}
-    header('location: ../index.php');
+    // header('location: ../index.php');
 }
 
 $result_usersoftware = $db->prepare("SELECT * FROM usersoftware INNER JOIN software on usersoftware.Software_ID = software.ID");
@@ -65,6 +67,7 @@ for($i=0; $row = $result_needupdate->fetch(); $i++){
 	$Username = $row['Username'];
 	$software = $row['Software'];
 	$usersoftwareID = $row['usersoftwareID'];
+	$EncodedusersoftwareID = base64_encode($usersoftwareID);
 	$headers = "MIME-Version: 1.0" . "\r\n";
 	$headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
 	$to = $Email;
@@ -84,7 +87,7 @@ for($i=0; $row = $result_needupdate->fetch(); $i++){
 			<tr>
 			<td>".$software . "</td>
 			<td>" . $Current_Version . "</td>
-		   	<td><a class='link' href=http://updatetracker.itmediasneek.nl/Software/update-checker.php?usersoftwareID=". $usersoftwareID.">Update</td></table>";
+		   	<td><a class='link' href=http://updatetracker.itmediasneek.nl/Software/update-checker.php?usersoftwareID=". $EncodedusersoftwareID.">Update</td></table>";
 	$message .="
 	<style>
 		html{

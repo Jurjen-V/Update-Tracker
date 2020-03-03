@@ -79,8 +79,8 @@ if(isset($_GET['usersoftwareID'])){
 	    echo "<td>" . $row['Software'] . "</td>";
 	   	echo "<td>" . $row['Current_Version'] . "</td>";
 	    echo "
-   			<td><a class='link' href=edit_software.php?usersoftwareID=". $usersoftwareID."&User_ID={$_GET['User_ID']}><i class='material-icons'>edit</i></a>
-   				<a class='link' href=?usersoftwareID=". $usersoftwareID."&User_ID={$_GET['User_ID']}><i class='material-icons'>delete</i></a></td>";
+   			<td><a title='Edit' class='link' href=edit_software.php?usersoftwareID=". $usersoftwareID."&User_ID={$_GET['User_ID']}><i class='material-icons'>edit</i></a>
+   				<a title='Delete' class='link' href=?usersoftwareID=". $usersoftwareID."&User_ID={$_GET['User_ID']}><i class='material-icons'>delete</i></a></td>";
 	    ?>
 	<?php } ?>
 	<p class="userinfo">User: <?php echo $username?></p>

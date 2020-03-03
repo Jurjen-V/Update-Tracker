@@ -138,7 +138,7 @@ if (isset($_POST['Save'])) {
 		</div>
 		<div class="row">
 			<div class="input-field col s12" id="Versie">
-				<input minlength="10" type="password" name="password_1" value="<?= $Password; ?>">
+				<input minlength="10" type="password" name="password_1">
           		<label for="Password">Password</label>
 			</div>
 		</div>

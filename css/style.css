@@ -231,6 +231,9 @@ tr:nth-child(even){
   opacity: 0.9;
 }
 @media only screen and (max-width: 600px) {
+  .alert {
+    top: 0%;
+  }
   ul{
     position: fixed;
     bottom: 0;

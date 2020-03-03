@@ -10,14 +10,14 @@ if (isset($_GET['logout'])) {
     header("location: ../index.php");
 }
 $User_ID= $_SESSION['id'];
-// $dbhost = 'localhost';
-// $dbname = 'update-tracker1';
-// $user = 'root';
-// $pass = ''; 
-$dbhost = "rdbms.strato.de";
-$dbname = "DB4001610";
-$user = "U4001610";
-$pass = "XYymJZVP8i!LC52";
+$dbhost = 'localhost';
+$dbname = 'update-tracker1';
+$user = 'root';
+$pass = ''; 
+// $dbhost = "rdbms.strato.de";
+// $dbname = "DB4001610";
+// $user = "U4001610";
+// $pass = "XYymJZVP8i!LC52";
 
 $db = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $user, $pass);
 $result_users = $db->prepare("SELECT * FROM users");
@@ -31,7 +31,7 @@ if(isset($_GET['ID'])){
     $insert = $db->prepare($query);
     $insert->execute();
     ?>
-    <script>window.location.href = "index.php";</script>
+    	<script>window.location.href = "index.php";</script>
     <?php
 }
 ?>
@@ -71,8 +71,8 @@ if(isset($_GET['ID'])){
 	    echo "<td>" . $row['Software'] . "</td>";
 	    echo "<td>" . $row['Current_Version'] . "</td>";
 	    echo "
-   			<td><a class='link' href=edit.php?ID=". $id."><i class='material-icons'>edit</i></a>
-   			<a onclick=\"return confirm('Delete This item?')\" class='link'href='?ID=". $id ."'><i class='material-icons'>delete</i></a></td>";
+   			<td><a title='Edit' class='link' href=edit.php?ID=". $id."><i class='material-icons'>edit</i></a>
+   			<a title='Delete' onclick=\"return confirm('Delete This item?')\" class='link'href='?ID=". $id ."'><i class='material-icons'>delete</i></a></td>";
 	    ?>
 	<?php } ?>
 	</tbody>

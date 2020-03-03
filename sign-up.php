@@ -83,7 +83,7 @@
         catch (PDOException $e) {
             throw $e;
         }
-        // header('Location:index.php');
+        header('Location:index.php');
       }else{
         ?>
         <div class="alert1">

@@ -66,17 +66,22 @@ if(isset($_GET['users_id'])){
 
 	  $result_projects->execute();
 	  for($i=0; $row = $result_projects->fetch(); $i++){
+	  	if($row['Paying'] == 1){
+	  		$Paying = "Ja";
+	  	}else{
+	  		$Paying = "Nee";
+	  	}
 	    $id = $row['ID'];
 	    echo "<tr>";
 	  	echo "<td>" . $id . "</td>";
 	    echo "<td>" . $row['Username'] . "</td>";
 	   	echo "<td class='th'>" . $row['Email'] . "</td>";
-	   	echo "<td>". $row['Paying']. "</td>";
+	   	echo "<td>". $Paying. "</td>";
 	    echo "
    			<td>
-   			<a class='link' href=view.php?User_ID=". $id."><i class='material-icons'>remove_red_eye</i></a>
-   			<a class='link' href=edit.php?User_ID=". $id."><i class='material-icons'>edit</i></a>
-   			<a onclick=\"return confirm('Delete This item?')\" class='link'href='?users_id=". $id ."'><i class='material-icons'>delete</i></a></td>";
+   			<a title='View' class='link' href=view.php?User_ID=". $id."><i class='material-icons'>remove_red_eye</i></a>
+   			<a title='Edit' class='link' href=edit.php?User_ID=". $id."><i class='material-icons'>edit</i></a>
+   			<a title='Delete' onclick=\"return confirm('Delete This item?')\" class='link'href='?users_id=". $id ."'><i class='material-icons'>delete</i></a></td>";
 	    ?>
 	<?php } ?>
 	</tbody>
